@@ -1,0 +1,321 @@
+{
+  "nav": {
+    "about": "About",
+    "services": "Service",
+    "portfolio": "Portfolio",
+    "pages": "Pages",
+    "home": "Home",
+    "servicesPage": "Services",
+    "portfolioPage": "Portfolio",
+    "blogPage": "Blog ",
+    "contactPage": "Contact",
+    "error": "Error 404"
+  },
+  "cta": {
+    "quote": "Get a Quote"
+  },
+  "common": {
+    "home": "Home"
+  },
+  "hero": {
+    "title": "Transform Your Digital Vision into Reality",
+    "subtitle": "We craft stunning websites and applications that drive results. From concept to launch, we deliver exceptional digital experiences that captivate audiences and grow your business.",
+    "explore": "Explore Portfolio",
+    "download": "Download Brochure",
+    "trusted": "Trusted by innovative companies worldwide"
+  },
+  "about": {
+    "badge": "ABOUT US",
+    "title": "Crafting Digital Excellence Since 2020",
+    "desc": "We are a passionate team of designers and developers dedicated to creating exceptional digital solutions that drive business growth and user engagement.",
+    "connect": "Connect With Us",
+    "connectDesc": "With over 5 years of experience in the digital industry, we've helped 200+ clients transform their online presence. Our approach combines creative design with technical expertise to deliver solutions that not only look amazing but perform exceptionally."
+  },
+  "services": {
+    "breadcrumb": "Service Details",
+    "introTitle": "Our Comprehensive Digital Solutions",
+    "introDesc": "We offer end-to-end digital services designed to elevate your brand and drive measurable results. Each solution is tailored to meet your unique business needs.",
+    "sidebarTitle": "Services",
+    "contactBoxTitle": "Let’s talk",
+    "callBack": "Get a call back",
+    "marketing": "Marketing solutions",
+    "branding": "Branding solutions",
+    "tabs": [
+      {
+        "id": "website-development",
+        "label": "Website Development",
+        "image": "/assets/img/services/service-01.webp",
+        "title": "Website Development",
+        "description1": "Create stunning, high-performance websites that convert visitors into customers. We build responsive, SEO-optimized sites that work seamlessly across all devices.",
+        "description2": "Our web development process focuses on user experience, performance, and scalability. We use modern technologies like Next.js, React, and Tailwind CSS to deliver fast, secure, and maintainable websites that grow with your business.",
+        "marketing": [
+          "Mobile-first responsive design",
+          "SEO optimization and fast loading",
+          "E-commerce integration capabilities",
+          "Content management system setup"
+        ],
+        "branding": "Your website is often the first impression customers have of your business. We ensure it's a memorable one that accurately represents your brand and drives conversions."
+      },
+      {
+        "id": "graphic-design",
+        "label": "Graphic Design",
+        "image": "/assets/img/services/service-02.webp",
+        "title": "Graphic Design",
+        "description1": "Transform your brand identity with compelling visual designs that communicate your message effectively and leave a lasting impression.",
+        "description2": "Our design team creates cohesive visual systems including logos, branding materials, marketing collateral, and digital assets that align with your business objectives and target audience.",
+        "marketing": [
+          "Logo and brand identity design",
+          "Marketing materials and presentations",
+          "Social media graphics and templates",
+          "Print and digital advertising design"
+        ],
+        "branding": "Strong visual identity builds trust and recognition. We craft designs that not only look beautiful but also communicate your brand values and resonate with your audience."
+      },
+      {
+        "id": "app-development",
+        "label": "App Development",
+        "image": "/assets/img/services/service-03.webp",
+        "title": "App Development",
+        "description1": "Build powerful mobile and web applications that solve real business problems and provide exceptional user experiences.",
+        "description2": "From concept to deployment, we develop custom applications using cutting-edge technologies. Our apps are scalable, secure, and designed to meet your specific business requirements.",
+        "marketing": [
+          "Cross-platform mobile app development",
+          "Progressive web applications (PWA)",
+          "API integration and backend development",
+          "App store optimization and deployment"
+        ],
+        "branding": "In today's mobile-first world, having a dedicated application can significantly enhance customer engagement and operational efficiency for your business."
+      }
+    ],
+    "extraParagraph": "Every project receives our full attention and expertise. We work closely with you to understand your goals and deliver solutions that exceed expectations."
+  },
+  "blogs":{
+    "blogTitle" : "Insights That Inspire Growth",
+    "blogDesc" : "Stay ahead of the curve with expert tips, strategies, and stories designed to help brands shine brighter in the digital world.",
+    "breadcrumb" : "Blog"    
+  },
+  "portfolio": {
+    "title": "Our Creative Work Portfolio",
+    "breadcrumb": "Portfolio Page",
+    "desc": "Explore our diverse portfolio of successful projects across various industries. Each project showcases our commitment to quality, innovation, and client satisfaction."
+  },
+  "contact": {
+    "title": "Get In Touch With Us",
+    "breadcrumb": "Contact Page",
+    "intro": "Ready to bring your digital vision to life? Contact us today for a free consultation and let's discuss how we can help your business thrive online."
+  },
+  "servicesHome": {
+    "badge": "WHAT WE DO",
+    "title": "Comprehensive Digital Solutions for Modern Businesses",
+    "explore": "EXPLORE SERVICES",
+    "viewDetails": "View Details",
+    "cards": {
+      "website-development": {
+        "title": "Website Development",
+        "desc": "Custom websites built with modern technologies to ensure fast loading, SEO optimization, and exceptional user experience."
+      },
+      "graphic-design": {
+        "title": "Graphic Design",
+        "desc": "Creative visual designs that strengthen your brand identity and communicate your message effectively across all platforms."
+      },
+      "app-development": {
+        "title": "App Development",
+        "desc": "Scalable mobile and web applications designed to solve business challenges and enhance customer engagement."
+      }
+    }
+  },
+  "clients": {
+    "title": "Trusted by Industry Leaders Worldwide",
+    "desc": "We've partnered with businesses of all sizes to deliver exceptional digital solutions that drive growth and innovation."
+  },
+  "contactSection": {
+    "badge": "Contact",
+    "title": "Have a Project in Mind?",
+    "desc": "Fill out the form below and we’ll get back to you soon.",
+    "placeholder": {
+      "name": "Enter your name",
+      "company": "Company (Optional)",
+      "email": "Enter your email",
+      "phone": "Phone number (with country code)",
+      "message": "Tell me about your project"
+    },
+    "button": {
+      "send": "Send Message",
+      "sending": "Sending..."
+    },
+    "alerts": {
+      "successTitle": "Success",
+      "successDefault": "Message sent successfully.",
+      "errorTitle": "Error",
+      "errorDefault": "Something went wrong",
+      "serverError": "Server error. Please try again later."
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "nameMin": "Name must be at least 2 characters",
+      "nameMax": "Name must not exceed 50 characters",
+      "nameFormat": "Only alphabets allowed & first letter must be capital",
+      "companyMax": "Company name must not exceed 50 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "phoneRequired": "Phone number is required",
+      "phoneFormat": "Phone cannot start with 0",
+      "phoneInvalid": "Invalid phone number",
+      "phoneShort": "Phone number too short (min 6 digits)",
+      "phoneLong": "Phone number too long (max 15 digits)",
+      "messageRequired": "Message is required",
+      "messageMin": "Message must be at least 10 characters",
+      "messageMax": "Message must not exceed 500 characters"
+    }
+  },
+  "team": {
+    "badge": "TEAM",
+    "title": "Meet Our Expert Team",
+    "desc": "Our talented professionals bring diverse skills and extensive experience to deliver innovative solutions that exceed client expectations."
+  },
+  "teamMembers" : [
+    {
+      "name": "Coriss Ambady",
+      "role": "Web Developer",
+      "image": "/assets/img/team/image-01.webp"
+    },
+    {
+      "name": "Glorius Cristian",
+      "role": "App Developer",
+      "image": "/assets/img/team/image-02.webp"
+    },
+    {
+      "name": "Jackie Sanders",
+      "role": "UI/UX Designer",
+      "image": "/assets/img/team/image-03.webp"
+    },
+    {
+      "name": "Nikolas Brooten",
+      "role": "Sales Manager",
+      "image": "/assets/img/team/image-04.webp"
+    }
+  ],
+  "testimonial": {
+    "badge": "TESTIMONIALS",
+    "title": "Client Success Stories",
+    "desc": "Discover why businesses trust us to deliver exceptional results and transform their digital presence.",
+    "items": [
+      {
+        "company": "LineIcons",
+        "quote": "Working with Zuinder transformed our online presence completely. Their team delivered a website that increased our conversion rate by 65% and improved user engagement significantly.",
+        "name": "Musharof Chy",
+        "position": "Founder @ LineIcons"
+      },
+      {
+        "company": "TailGrids",
+        "quote": "The mobile app developed by Zuinder exceeded all our expectations. It's intuitive, fast, and has helped us reach 3x more customers in just 6 months.",
+        "name": "Devid Sailio",
+        "position": "Founder @ TailGrids"
+      },
+      {
+        "company": "FormBold",
+        "quote": "Their branding strategy completely revitalized our company image. The new visual identity has made us stand out in a crowded market and increased brand recognition by 80%.",
+        "name": "Ali Bravo",
+        "position": "CEO @ FormBold"
+      },
+      {
+        "company": "UIDeck",
+        "quote": "Zuinder's e-commerce solution streamlined our operations and boosted sales by 120%. Their attention to detail and technical expertise is unmatched in the industry.",
+        "name": "Jenny Wilson",
+        "position": "CTO @ UIDeck"
+      }
+    ]
+  },
+  "newsletter": {
+    "title": "Stay Updated with Industry Insights & Offers",
+    "placeholder": "Enter your email",
+    "subscribe": "Subscribe Now",
+    "toast": {
+      "success": "🎉 Thanks for subscribing! Welcome to our community.",
+      "errorDefault": "Something went wrong. Please try again.",
+      "serverError": "⚠️ Server error. Please try again later.",
+      "invalid": "Please enter a valid email address."
+    },
+    "validation": {
+      "required": "Email is required.",
+      "min": "Email must be at least 5 characters long.",
+      "max": "Email must not exceed 50 characters.",
+      "invalid": "Please enter a valid email with a proper domain."
+    }
+  },
+  "portfolioHome": {
+    "badge": "Creative Portfolio",
+    "title": "Showcase of Excellence",
+    "desc": "Explore our diverse portfolio featuring innovative projects across web development, mobile apps, and creative design solutions.",
+    "filters": ["All", "Web Development", "Mobile Apps", "UI/UX Design", "Branding", "E-commerce"],
+    "items": [
+      {
+        "title": "E-commerce Platform Redesign",
+        "category": "Web Development",
+        "description": "Complete redesign of an online retail platform resulting in 40% increase in conversion rates and improved user experience."
+      },
+      {
+        "title": "Healthcare Mobile Application",
+        "category": "Mobile Apps",
+        "description": "Patient management app with appointment scheduling, medication tracking, and telemedicine features."
+      },
+      {
+        "title": "Corporate Brand Identity",
+        "category": "Branding",
+        "description": "Comprehensive brand development including logo design, style guide, and marketing collateral for a tech startup."
+      },
+      {
+        "title": "SaaS Dashboard Interface",
+        "category": "UI/UX Design",
+        "description": "Intuitive dashboard design for a SaaS platform, focusing on data visualization and user workflow optimization."
+      }
+    ]
+  },
+  "blog": {
+    "badge": "BLOG",
+    "title": "Latest Industry Insights",
+    "desc": "Stay informed with our expert articles covering web development trends, design best practices, and digital marketing strategies.",
+    "readMore": "Read More",
+    "items": [
+      {
+        "title": "The Future of Web Development: Trends to Watch in 2025",
+        "desc": "Explore emerging technologies and methodologies that are shaping the future of digital experiences and online business growth."
+      },
+      {
+        "title": "Mobile-First Design: Why It's Essential for Modern Businesses",
+        "desc": "Learn how prioritizing mobile experience can significantly impact user engagement and conversion rates for your digital products."
+      },
+      {
+        "title": "Building Scalable Applications: Best Practices and Architecture",
+        "desc": "Discover proven strategies for creating applications that can grow with your business while maintaining performance and reliability."
+      }
+    ]
+  },
+  "footer": {
+    "letsTalk": "Let's Talk!",
+    "contactInfo": "Contact Info",
+    "email": "hello@zuinder.com",
+    "address": "123 Digital Avenue, Tech City TC 10101",
+    "phone": "+1 (555) 123-4567",
+    "whatIDo": "Our Services",
+    "whatIDoLinks": ["Web Development", "App Development", "UI/UX Design", "Brand Strategy"],
+    "news": "Resources",
+    "newsLinks": ["Case Studies", "Blog Articles", "Industry Reports", "Free Templates"],
+    "quickLinks": "Quick Links",
+    "quickLinksItems": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/#about" },
+    { "label": "Services", "href": "/services" },
+    { "label": "Contact", "href": "/contact" },
+    { "label": "Blog", "href": "/blog" }
+  ],
+    "copyright": "Zuinder Digital Agency - © 2025"
+  },
+  "error": {
+    "oops": "OOPS!",
+    "title": "Page Not Found",
+    "desc": "The page you're looking for doesn't exist. Don't worry - you can explore our services or return to the homepage to continue your journey.",
+    "home": "Return to Homepage"
+  }
+}
+

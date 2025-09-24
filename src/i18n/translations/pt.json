@@ -1,0 +1,343 @@
+{
+  "nav": {
+    "about": "Sobre",
+    "services": "Serviços",
+    "portfolio": "Portfólio",
+    "pages": "Páginas",
+    "home": "Inicial",
+    "servicesPage": " Serviços",
+    "portfolioPage": " Portfólio",
+    "blogPage": " Blog",
+    "contactPage": " Contato"
+  },
+  "cta": {
+    "quote": "Solicitar Orçamento"
+  },
+  "common": {
+    "home": "Início"
+  },
+  "hero": {
+    "title": "Transforme Sua Visão Digital em Realidade",
+    "subtitle": "Criamos sites e aplicativos impressionantes que geram resultados. Do conceito ao lançamento, entregamos experiências digitais excepcionais que cativam audiências e fazem seu negócio crescer.",
+    "explore": "Explorar Portfólio",
+    "download": "Baixar Brochure",
+    "trusted": "Confiado por empresas inovadoras em todo o mundo"
+  },
+  "about": {
+    "badge": "SOBRE NÓS",
+    "title": "Criando Excelência Digital Desde 2020",
+    "desc": "Somos uma equipe apaixonada de designers e desenvolvedores dedicados a criar soluções digitais excepcionais que impulsionam o crescimento dos negócios e o engajamento dos usuários.",
+    "connect": "Conecte-se Conosco",
+    "connectDesc": "Com mais de 5 anos de experiência na indústria digital, ajudamos mais de 200 clientes a transformar sua presença online. Nossa abordagem combina design criativo com expertise técnica para entregar soluções que não apenas impressionam visualmente, mas também performam excepcionalmente."
+  },
+  "services": {
+    "breadcrumb": "Detalhes do Serviço",
+    "introTitle": "Nossas Soluções Digitais Abrangentes",
+    "introDesc": "Oferecemos serviços digitais completos projetados para elevar sua marca e gerar resultados mensuráveis. Cada solução é personalizada para atender às necessidades específicas do seu negócio.",
+    "sidebarTitle": "Serviços",
+    "contactBoxTitle": "Vamos conversar",
+    "callBack": "Solicitar retorno",
+    "marketing": "Soluções de marketing",
+    "branding": "Soluções de branding",
+    "tabs": [
+      {
+        "id": "website-development",
+        "label": "Desenvolvimento de Sites",
+        "image": "/assets/img/services/service-01.webp",
+        "title": "Desenvolvimento de Sites",
+        "description1": "Crie sites impressionantes e de alto desempenho que convertem visitantes em clientes. Construímos sites responsivos e otimizados para SEO que funcionam perfeitamente em todos os dispositivos.",
+        "description2": "Nosso processo de desenvolvimento web foca na experiência do usuário, desempenho e escalabilidade. Usamos tecnologias modernas como Next.js, React e Tailwind CSS para entregar sites rápidos, seguros e sustentáveis que crescem com seu negócio.",
+        "marketing": [
+          "Design responsivo mobile-first",
+          "Otimização SEO e carregamento rápido",
+          "Capacidades de integração e-commerce",
+          "Configuração de sistema de gerenciamento de conteúdo"
+        ],
+        "branding": "Seu site é muitas vezes a primeira impressão que os clientes têm do seu negócio. Garantimos que seja memorável e represente com precisão sua marca, impulsionando conversões."
+      },
+      {
+        "id": "graphic-design",
+        "label": "Design Gráfico",
+        "image": "/assets/img/services/service-02.webp",
+        "title": "Design Gráfico",
+        "description1": "Transforme sua identidade visual com designs impactantes que comunicam sua mensagem de forma eficaz e deixam uma impressão duradoura.",
+        "description2": "Nossa equipe de design cria sistemas visuais coesos incluindo logotipos, materiais de branding, materiais de marketing e ativos digitais que se alinham com seus objetivos de negócio e público-alvo.",
+        "marketing": [
+          "Design de logo e identidade visual",
+          "Materiais de marketing e apresentações",
+          "Gráficos e templates para mídias sociais",
+          "Design para publicidade impressa e digital"
+        ],
+        "branding": "Uma identidade visual forte constrói confiança e reconhecimento. Criamos designs que não apenas são bonitos, mas também comunicam os valores da sua marca e ressoam com seu público."
+      },
+      {
+        "id": "app-development",
+        "label": "Desenvolvimento de Apps",
+        "image": "/assets/img/services/service-03.webp",
+        "title": "Desenvolvimento de Apps",
+        "description1": "Construa aplicativos móveis e web poderosos que resolvem problemas reais de negócio e proporcionam experiências excepcionais aos usuários.",
+        "description2": "Do conceito à implantação, desenvolvemos aplicativos personalizados usando tecnologias de ponta. Nossos aplicativos são escaláveis, seguros e projetados para atender aos requisitos específicos do seu negócio.",
+        "marketing": [
+          "Desenvolvimento de aplicativos móveis multiplataforma",
+          "Aplicações web progressivas (PWA)",
+          "Integração de API e desenvolvimento backend",
+          "Otimização e implantação em lojas de aplicativos"
+        ],
+        "branding": "No mundo atual orientado para dispositivos móveis, ter um aplicativo dedicado pode melhorar significativamente o engajamento do cliente e a eficiência operacional do seu negócio."
+      }
+    ],
+    "extraParagraph": "Cada projeto recebe nossa atenção total e expertise. Trabalhamos em estreita colaboração com você para entender seus objetivos e entregar soluções que superem as expectativas."
+  },
+  "blogs": {
+  "blogTitle": "Percepções que Inspiram Crescimento",
+  "blogDesc": "Mantenha-se à frente com dicas, estratégias e histórias de especialistas projetadas para ajudar marcas a brilhar ainda mais no mundo digital.",
+  "breadcrumb": "Blog"
+},
+  "portfolio": {
+    "title": "Nosso Portfólio de Trabalhos Criativos",
+    "breadcrumb": "Página de Portfólio",
+    "desc": "Explore nosso portfólio diversificado de projetos bem-sucedidos em várias indústrias. Cada projeto demonstra nosso compromisso com qualidade, inovação e satisfação do cliente."
+  },
+  "contact": {
+    "title": "Entre em Contato Conosco",
+    "breadcrumb": "Página de Contato",
+    "intro": "Pronto para transformar sua visão digital em realidade? Entre em contato hoje para uma consulta gratuita e vamos discutir como podemos ajudar seu negócio a prosperar online."
+  },
+  "servicesHome": {
+    "badge": "O QUE FAZEMOS",
+    "title": "Soluções Digitais Abrangentes para Empresas Modernas",
+    "explore": "EXPLORAR SERVIÇOS",
+    "viewDetails": "Ver Detalhes",
+    "cards": {
+      "website-development": {
+        "title": "Desenvolvimento de Sites",
+        "desc": "Sites personalizados construídos com tecnologias modernas para garantir carregamento rápido, otimização SEO e experiência excepcional do usuário."
+      },
+      "graphic-design": {
+        "title": "Design Gráfico",
+        "desc": "Designs visuais criativos que fortalecem sua identidade de marca e comunicam sua mensagem de forma eficaz em todas as plataformas."
+      },
+      "app-development": {
+        "title": "Desenvolvimento de Apps",
+        "desc": "Aplicativos móveis e web escaláveis projetados para resolver desafios de negócio e melhorar o engajamento do cliente."
+      }
+    }
+  },
+  "clients": {
+    "title": "Confiado por Líderes da Indústria em Todo o Mundo",
+    "desc": "Parcerias com empresas de todos os tamanhos para entregar soluções digitais excepcionais que impulsionam crescimento e inovação."
+  },
+  "contactSection": {
+    "badge": "Contato",
+    "title": "Tem um Projeto em Mente?",
+    "desc": "Preencha o formulário abaixo e entraremos em contato em breve.",
+    "placeholder": {
+      "name": "Digite seu nome",
+      "company": "Empresa (Opcional)",
+      "email": "Digite seu e-mail",
+      "phone": "Telefone (com código do país)",
+      "message": "Fale sobre o seu projeto"
+    },
+    "button": {
+      "send": "Enviar Mensagem",
+      "sending": "Enviando..."
+    },
+    "alerts": {
+      "successTitle": "Sucesso",
+      "successDefault": "Mensagem enviada com sucesso.",
+      "errorTitle": "Erro",
+      "errorDefault": "Algo deu errado",
+      "serverError": "Erro no servidor. Tente novamente mais tarde."
+    },
+    "validation": {
+      "nameRequired": "Nome é obrigatório",
+      "nameMin": "O nome deve ter pelo menos 2 caracteres",
+      "nameMax": "O nome não deve exceder 50 caracteres",
+      "nameFormat": "Apenas letras são permitidas e a primeira letra deve ser maiúscula",
+      "companyMax": "O nome da empresa não deve exceder 50 caracteres",
+      "emailRequired": "E-mail é obrigatório",
+      "emailInvalid": "E-mail inválido",
+      "phoneRequired": "Telefone é obrigatório",
+      "phoneFormat": "O telefone não pode começar com 0",
+      "phoneInvalid": "Número de telefone inválido",
+      "phoneShort": "Telefone muito curto (mín. 6 dígitos)",
+      "phoneLong": "Telefone muito longo (máx. 15 dígitos)",
+      "messageRequired": "Mensagem é obrigatória",
+      "messageMin": "A mensagem deve ter pelo menos 10 caracteres",
+      "messageMax": "A mensagem não deve exceder 500 caracteres"
+    }
+  },
+  "team": {
+    "badge": "EQUIPE",
+    "title": "Conheça Nossa Equipe de Especialistas",
+    "desc": "Nossos talentosos profissionais trazem habilidades diversas e experiência extensa para entregar soluções inovadoras que superam as expectativas dos clientes.",
+    "teamMembers" :[
+      {
+        "name": "Coriss Ambady",
+        "role": "Desenvolvedor Web",
+        "image": "/assets/img/team/image-01.webp"
+      },
+      {
+        "name": "Glorius Cristian",
+        "role": "Desenvolvedor de Aplicativos",
+        "image": "/assets/img/team/image-02.webp"
+      },
+      {
+        "name": "Jackie Sanders",
+        "role": "Designer de UI/UX",
+        "image": "/assets/img/team/image-03.webp"
+      },
+      {
+        "name": "Nikolas Brooten",
+        "role": "Gerente de Vendas",
+        "image": "/assets/img/team/image-04.webp"
+      }
+    ]
+  },
+  "testimonial": {
+    "badge": "DEPOIMENTOS",
+    "title": "Histórias de Sucesso dos Clientes",
+    "desc": "Descubra por que as empresas confiam em nós para entregar resultados excepcionais e transformar sua presença digital.",
+    "items": [
+      {
+        "company": "LineIcons",
+        "quote": "Trabalhar com a Zuinder transformou completamente nossa presença online. A equipe entregou um site que aumentou nossa taxa de conversão em 65% e melhorou significativamente o engajamento dos usuários.",
+        "name": "Musharof Chy",
+        "position": "Fundador @ LineIcons"
+      },
+      {
+        "company": "TailGrids",
+        "quote": "O aplicativo móvel desenvolvido pela Zuinder superou todas as nossas expectativas. É intuitivo, rápido e nos ajudou a alcançar 3x mais clientes em apenas 6 meses.",
+        "name": "Devid Sailio",
+        "position": "Fundador @ TailGrids"
+      },
+      {
+        "company": "FormBold",
+        "quote": "A estratégia de branding deles revitalizou completamente a imagem da nossa empresa. A nova identidade visual nos destacou em um mercado competitivo e aumentou o reconhecimento da marca em 80%.",
+        "name": "Ali Bravo",
+        "position": "CEO @ FormBold"
+      },
+      {
+        "company": "UIDeck",
+        "quote": "A solução de e-commerce da Zuinder otimizou nossas operações e aumentou as vendas em 120%. A atenção aos detalhes e a expertise técnica deles são incomparáveis no setor.",
+        "name": "Jenny Wilson",
+        "position": "CTO @ UIDeck"
+      }
+    ]
+  },
+  "newsletter": {
+    "title": "Mantenha-se Atualizado com Insights da Indústria e Ofertas",
+    "placeholder": "Digite seu e-mail",
+    "subscribe": "Assinar Agora",
+    "toast": {
+      "success": "🎉 Obrigado por assinar! Bem-vindo à nossa comunidade.",
+      "errorDefault": "Algo deu errado. Por favor, tente novamente.",
+      "serverError": "⚠️ Erro no servidor. Tente novamente mais tarde.",
+      "invalid": "Por favor, insira um endereço de e-mail válido."
+    },
+    "validation": {
+      "required": "E-mail é obrigatório.",
+      "min": "O e-mail deve ter pelo menos 5 caracteres.",
+      "max": "O e-mail não deve exceder 50 caracteres.",
+      "invalid": "Insira um e-mail válido com um domínio correto."
+    }
+  },
+  "portfolioHome": {
+    "badge": "Portfólio Criativo",
+    "title": "Vitrine de Excelência",
+    "desc": "Explore nosso portfólio diversificado apresentando projetos inovadores em desenvolvimento web, aplicativos móveis e soluções de design criativo.",
+    "filters": ["Todos", "Desenvolvimento Web", "Apps Móveis", "UI/UX Design", "Branding", "E-commerce"],
+    "items": [
+      {
+        "title": "Redesign de Plataforma E-commerce",
+        "category": "Desenvolvimento Web",
+        "description": "Redesign completo de uma plataforma de varejo online resultando em aumento de 40% nas taxas de conversão e experiência do usuário melhorada."
+      },
+      {
+        "title": "Aplicativo Móvel de Saúde",
+        "category": "Apps Móveis",
+        "description": "App de gerenciamento de pacientes com agendamento de consultas, controle de medicação e recursos de telemedicina."
+      },
+      {
+        "title": "Identidade Visual Corporativa",
+        "category": "Branding",
+        "description": "Desenvolvimento completo de marca incluindo design de logo, guia de estilo e materiais de marketing para uma startup de tecnologia."
+      },
+      {
+        "title": "Interface de Dashboard SaaS",
+        "category": "UI/UX Design",
+        "description": "Design de dashboard intuitivo para plataforma SaaS, focando em visualização de dados e otimização do fluxo de trabalho do usuário."
+      }
+    ]
+  },
+  "blog": {
+    "badge": "BLOG",
+    "title": "Últimos Insights da Indústria",
+    "desc": "Mantenha-se informado com nossos artigos especializados cobrindo tendências de desenvolvimento web, melhores práticas de design e estratégias de marketing digital.",
+    "readMore": "Leia Mais",
+    "items": [
+      {
+        "title": "O Futuro do Desenvolvimento Web: Tendências para Observar em 2025",
+        "desc": "Explore tecnologias emergentes e metodologias que estão moldando o futuro das experiências digitais e do crescimento dos negócios online."
+      },
+      {
+        "title": "Design Mobile-First: Por que é Essencial para Empresas Modernas",
+        "desc": "Aprenda como priorizar a experiência móvel pode impactar significativamente o engajamento do usuário e as taxas de conversão dos seus produtos digitais."
+      },
+      {
+        "title": "Construindo Aplicações Escaláveis: Melhores Práticas e Arquitetura",
+        "desc": "Descubra estratégias comprovadas para criar aplicações que podem crescer com seu negócio mantendo desempenho e confiabilidade."
+      }
+    ]
+  },
+  "footer": {
+    "letsTalk": "Vamos Conversar!",
+    "contactInfo": "Informações de Contato",
+    "email": "ola@zuinder.com",
+    "address": "Avenida Digital 123, Cidade Tech CT 10101",
+    "phone": "+55 (11) 98765-4321",
+    "whatIDo": "Nossos Serviços",
+    "whatIDoLinks": ["Desenvolvimento Web", "Desenvolvimento de Apps", "UI/UX Design", "Estratégia de Marca"],
+    "news": "Recursos",
+    "newsLinks": ["Estudos de Caso", "Artigos do Blog", "Relatórios da Indústria", "Templates Gratuitos"],
+    "quickLinks": "Links Rápidos",
+    "quickLinksItems": [
+  { "label": "Início", "href": "/" },
+  { "label": "Sobre", "href": "/#about" },
+  { "label": "Serviços", "href": "/services" },
+  { "label": "Contato", "href": "/contact" },
+  { "label": "Blog", "href": "/blog" }
+],
+    "copyright": "Agência Digital Zuinder - © 2025"
+  },
+  "error": {
+    "oops": "OOPS!",
+    "title": "Página Não Encontrada",
+    "desc": "A página que você está procurando não existe. Não se preocupe - você pode explorar nossos serviços ou voltar à página inicial para continuar sua jornada.",
+    "home": "Voltar à Página Inicial"
+  },
+  "teamMembers" :[
+      {
+        "name": "Coriss Ambady",
+        "role": "Desenvolvedor Web",
+        "image": "/assets/img/team/image-01.webp"
+      },
+      {
+        "name": "Glorius Cristian",
+        "role": "Desenvolvedor de Aplicativos",
+        "image": "/assets/img/team/image-02.webp"
+      },
+      {
+        "name": "Jackie Sanders",
+        "role": "Designer de UI/UX",
+        "image": "/assets/img/team/image-03.webp"
+      },
+      {
+        "name": "Nikolas Brooten",
+        "role": "Gerente de Vendas",
+        "image": "/assets/img/team/image-04.webp"
+      }
+  ]
+  }
+
+
