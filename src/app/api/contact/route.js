@@ -8,9 +8,6 @@ export async function POST(req) {
     await connectDB();
     const body = await req.json();
 
-    console.log("Mongo URL:", process.env.MONGODBURL);
-
-
     // Save to DB
     const newContact = await Contact.create(body);
 

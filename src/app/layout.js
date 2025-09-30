@@ -1,8 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/component/Header/header";
-import Footer from "@/component/Footer/footer";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
+import ConditionalLayout from "@/components/ConditionalLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,21 +16,18 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Zuinder",
   description: "Inovando Pelo Mundo",
-  icons: {
-    icon: "/assets/img/logo/logo.jpeg", 
-  }
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <LanguageProvider>
-          <Header/>
-          {children}
-          <Footer/>
+          <ConditionalLayout>
+            {children}
+          </ConditionalLayout>
         </LanguageProvider>
       </body>
     </html>

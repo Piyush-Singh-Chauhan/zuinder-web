@@ -24,7 +24,7 @@ body {
 
 /* Header / Navbar */
 header {
-  background: var(--color-secondary);
+  /* background: var(--color-secondary); */
   color: var(--color-white);
 }
 

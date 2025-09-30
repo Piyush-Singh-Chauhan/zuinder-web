@@ -3,33 +3,89 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { useState, useEffect } from "react";
 
 export default function BlogSection() {
-  const { t } = useLanguage();
-  const translated = t("blog.items") || [];
-  const blogs = [
-    {
-      id: 1,
-      title: translated[0]?.title,
-      desc: translated[0]?.desc,
-      image: "/assets/img/blog/blog1.webp",
-      link: "/blog/exploring-the-mern-stack-powering-modern-web-development",
-    },
-    {
-      id: 2,
-      title: translated[1]?.title,
-      desc: translated[1]?.desc,
-      image: "/assets/img/blog/blog2.webp",
-      link: "/blog/best-ui-components-for-modern-websites",
-    },
-    {
-      id: 3,
-      title: translated[2]?.title,
-      desc: translated[2]?.desc,
-      image: "/assets/img/blog/blog3.webp",
-      link: "/blog/the-power-of-uiux-elevating-digital-experiences",
-    },
-  ];
+  const { t, language } = useLanguage();
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  // Helper function to get localized text
+  const getLocalizedText = (textObj, fallback = '') => {
+    if (!textObj) return fallback;
+    if (typeof textObj === 'string') return textObj;
+    return textObj[language] || textObj.en || textObj.pt || fallback;
+  };
+
+  const fetchBlogs = async () => {
+    try {
+      const response = await fetch('/api/admin/blogs?limit=3');
+      const data = await response.json();
+      
+      if (data.success && data.data.length > 0) {
+        setBlogs(data.data);
+      } else {
+        // Fallback to static data if no blogs from API
+        const translated = t("blog.items") || [];
+        setBlogs([
+          {
+            _id: 1,
+            title: { en: translated[0]?.title, pt: translated[0]?.title },
+            description: { en: translated[0]?.desc, pt: translated[0]?.desc },
+            image: "/assets/img/blog/blog1.webp",
+            slug: "exploring-the-mern-stack-powering-modern-web-development",
+          },
+          {
+            _id: 2,
+            title: { en: translated[1]?.title, pt: translated[1]?.title },
+            description: { en: translated[1]?.desc, pt: translated[1]?.desc },
+            image: "/assets/img/blog/blog2.webp",
+            slug: "best-ui-components-for-modern-websites",
+          },
+          {
+            _id: 3,
+            title: { en: translated[2]?.title, pt: translated[2]?.title },
+            description: { en: translated[2]?.desc, pt: translated[2]?.desc },
+            image: "/assets/img/blog/blog3.webp",
+            slug: "the-power-of-uiux-elevating-digital-experiences",
+          },
+        ]);
+      }
+    } catch (error) {
+      console.error('Failed to fetch blogs:', error);
+      // Fallback to static data
+      const translated = t("blog.items") || [];
+      setBlogs([
+        {
+          _id: 1,
+          title: { en: translated[0]?.title, pt: translated[0]?.title },
+          description: { en: translated[0]?.desc, pt: translated[0]?.desc },
+          image: "/assets/img/blog/blog1.webp",
+          slug: "exploring-the-mern-stack-powering-modern-web-development",
+        },
+        {
+          _id: 2,
+          title: { en: translated[1]?.title, pt: translated[1]?.title },
+          description: { en: translated[1]?.desc, pt: translated[1]?.desc },
+          image: "/assets/img/blog/blog2.webp",
+          slug: "best-ui-components-for-modern-websites",
+        },
+        {
+          _id: 3,
+          title: { en: translated[2]?.title, pt: translated[2]?.title },
+          description: { en: translated[2]?.desc, pt: translated[2]?.desc },
+          image: "/assets/img/blog/blog3.webp",
+          slug: "the-power-of-uiux-elevating-digital-experiences",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section id="news" className="bg-[#f8f9ff] py-16 sm:py-20 lg:pt-[120px]">
@@ -58,14 +114,14 @@ export default function BlogSection() {
           sm:grid-cols-2 
           lg:grid-cols-3
         ">
-          {blogs.map((blog) => (
-            <article key={blog.id} className="relative group">
+          {blogs.slice(0, 3).map((blog) => (
+            <article key={blog._id} className="relative group">
               <div className="shadow-blog flex h-full flex-col overflow-hidden rounded-xl bg-white transition-transform duration-300 hover:scale-[1.02]">
                 {/* Blog Image */}
                 <div className="relative block aspect-video">
                   <Image
                     src={blog.image}
-                    alt={blog.title}
+                    alt={getLocalizedText(blog.title)}
                     fill
                     className="rounded-t-xl w-full object-cover duration-300 group-hover:scale-110"
                   />
@@ -76,19 +132,19 @@ export default function BlogSection() {
                   <div>
                     <h3 className="mb-3 line-clamp-2">
                       <Link
-                        href={blog.link}
+                        href={blog.slug ? `/blog/${blog.slug}` : `#`}
                         className="hover:text-primary text-lg sm:text-xl font-semibold text-black duration-200"
                       >
                         <span className="absolute inset-0" aria-hidden="true"></span>
-                        {blog.title}
+                        {getLocalizedText(blog.title)}
                       </Link>
                     </h3>
                     <p className="text-body-color mb-4 line-clamp-3 text-sm sm:text-base font-medium">
-                      {blog.desc}
+                      {getLocalizedText(blog.description)}
                     </p>
                   </div>
                   <Link
-                    href={blog.link}
+                    href={blog.slug ? `/blog/${blog.slug}` : `#`}
                     className="hover:text-primary text-xs sm:text-sm font-medium text-black underline duration-200 hover:no-underline"
                   >
                     {t("blog.readMore")}

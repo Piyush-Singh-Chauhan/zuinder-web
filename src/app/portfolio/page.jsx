@@ -1,48 +1,151 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
-const portfolioDataStatic = [
-  {
-    image: "/assets/img/portfolio/portfolio-01.jpg",
-    link: "/portfolio/startup-landing-page",
-  },
-  {
-    image: "/assets/img/portfolio/portfolio-02.jpg",
-    link: "/portfolio/job-portal-landing-page",
-  },
-  {
-    image: "/assets/img/portfolio/portfolio-03.jpg",
-    link: "/portfolio/saas-landing-page",
-  },
-  {
-    image: "/assets/img/portfolio/portfolio-04.jpg",
-    link: "/portfolio/business-corporate-template",
-  },
-];
-
 export default function Portfolio() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
   const [modalImage, setModalImage] = useState(null);
+  const [portfolioItems, setPortfolioItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const i18nItems = (t("portfolioHome.items") || []).map((transItem, idx) => ({
-    title: transItem.title,
-    category: transItem.category,
-    description: transItem.description,
-    image: portfolioDataStatic[idx]?.image,
-    link: portfolioDataStatic[idx]?.link,
-  }));
+  // Helper function to get localized text
+  const getLocalizedText = (textObj, fallback = '') => {
+    if (!textObj) return fallback;
+    if (typeof textObj === 'string') return textObj;
+    return textObj[language] || textObj.en || textObj.pt || fallback;
+  };
+
+  useEffect(() => {
+    const fetchPortfolio = async () => {
+      try {
+        const response = await fetch('/api/admin/portfolio');
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && Array.isArray(result.data)) {
+            setPortfolioItems(result.data);
+          } else {
+            console.error('Invalid API response structure');
+            // Fallback to static data structure with translation
+            const portfolioDataStatic = [
+              {
+                image: "/assets/img/portfolio/portfolio-01.jpg",
+                link: "/portfolio/startup-landing-page",
+              },
+              {
+                image: "/assets/img/portfolio/portfolio-02.jpg",
+                link: "/portfolio/job-portal-landing-page",
+              },
+              {
+                image: "/assets/img/portfolio/portfolio-03.jpg",
+                link: "/portfolio/saas-landing-page",
+              },
+              {
+                image: "/assets/img/portfolio/portfolio-04.jpg",
+                link: "/portfolio/business-corporate-template",
+              },
+            ];
+            
+            const i18nItems = (t("portfolioHome.items") || []).map((transItem, idx) => ({
+              _id: `portfolio-${idx}`,
+              title: { [language]: transItem.title },
+              category: { [language]: transItem.category },
+              description: { [language]: transItem.description },
+              image: portfolioDataStatic[idx]?.image,
+              slug: portfolioDataStatic[idx]?.link?.replace('/portfolio/', ''),
+            }));
+            setPortfolioItems(i18nItems);
+          }
+        } else {
+          console.error('Failed to fetch portfolio');
+          // Fallback to static data structure with translation
+          const portfolioDataStatic = [
+            {
+              image: "/assets/img/portfolio/portfolio-01.jpg",
+              link: "/portfolio/startup-landing-page",
+            },
+            {
+              image: "/assets/img/portfolio/portfolio-02.jpg",
+              link: "/portfolio/job-portal-landing-page",
+            },
+            {
+              image: "/assets/img/portfolio/portfolio-03.jpg",
+              link: "/portfolio/saas-landing-page",
+            },
+            {
+              image: "/assets/img/portfolio/portfolio-04.jpg",
+              link: "/portfolio/business-corporate-template",
+            },
+          ];
+          
+          const i18nItems = (t("portfolioHome.items") || []).map((transItem, idx) => ({
+            _id: `portfolio-${idx}`,
+            title: { [language]: transItem.title },
+            category: { [language]: transItem.category },
+            description: { [language]: transItem.description },
+            image: portfolioDataStatic[idx]?.image,
+            slug: portfolioDataStatic[idx]?.link?.replace('/portfolio/', ''),
+          }));
+          setPortfolioItems(i18nItems);
+        }
+      } catch (error) {
+        console.error('Error fetching portfolio:', error);
+        // Fallback to static data
+        const portfolioDataStatic = [
+          {
+            image: "/assets/img/portfolio/portfolio-01.jpg",
+            link: "/portfolio/startup-landing-page",
+          },
+          {
+            image: "/assets/img/portfolio/portfolio-02.jpg",
+            link: "/portfolio/job-portal-landing-page",
+          },
+          {
+            image: "/assets/img/portfolio/portfolio-03.jpg",
+            link: "/portfolio/saas-landing-page",
+          },
+          {
+            image: "/assets/img/portfolio/portfolio-04.jpg",
+            link: "/portfolio/business-corporate-template",
+          },
+        ];
+        
+        const i18nItems = (t("portfolioHome.items") || []).map((transItem, idx) => ({
+          _id: `portfolio-${idx}`,
+          title: { [language]: transItem.title },
+          category: { [language]: transItem.category },
+          description: { [language]: transItem.description },
+          image: portfolioDataStatic[idx]?.image,
+          slug: portfolioDataStatic[idx]?.link?.replace('/portfolio/', ''),
+        }));
+        setPortfolioItems(i18nItems);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPortfolio();
+  }, [language, t]);
 
   const filters = t("portfolioHome.filters") || [];
   const activeFilterLabel = filters[selectedFilterIndex] || "";
 
-  const filteredData =
-    selectedFilterIndex === 0
-      ? i18nItems
-      : i18nItems.filter((item) => item.category === activeFilterLabel);
+  // Get unique categories from portfolio items
+  const dynamicFilters = ['All', ...new Set(portfolioItems.map(item => 
+    item.category?.[language] || item.category?.en || item.category || 'Uncategorized'
+  ).filter(Boolean))];
+
+  // Use dynamic filters if available, otherwise fallback to translation filters
+  const availableFilters = dynamicFilters.length > 1 ? dynamicFilters : filters;
+
+  const filteredData = selectedFilterIndex === 0 
+    ? portfolioItems 
+    : portfolioItems.filter((item) => {
+        const itemCategory = getLocalizedText(item.category, 'Uncategorized');
+        return itemCategory === (availableFilters[selectedFilterIndex] || activeFilterLabel);
+      });
 
   return (
     <>
@@ -165,56 +268,94 @@ export default function Portfolio() {
         </span>
       </section>
       {/* Portfolio Section */}
-
       <section className="bg-white pt-[90px] pb-20">
         <div className="container mx-auto px-4">
+          {/* Filter tabs */}
+          {availableFilters.length > 1 && (
+            <div className="mb-8 flex flex-wrap justify-center gap-2">
+              {availableFilters.map((filter, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedFilterIndex(index)}
+                  className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                    selectedFilterIndex === index
+                      ? 'bg-[#F15A29] text-white'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          )}
+          
           <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {filteredData.map((item, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-md shadow-service"
-              >
-                <div className="relative aspect-[518/291] w-full">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                  />
-                  {/* Overlay Button */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-[#F15A29]/20 opacity-0 transition-all group-hover:opacity-100">
-                    <button
-                      className="bg-primary flex h-10 w-10 items-center justify-center rounded-full text-white"
-                      onClick={() => setModalImage(item.image)}
-                    >
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </button>
+            {loading ? (
+              // Loading skeleton
+              Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="group relative overflow-hidden rounded-md shadow-service">
+                  <div className="relative aspect-[518/291] w-full bg-gray-200 animate-pulse"></div>
+                  <div className="mt-3">
+                    <div className="mb-2 h-6 bg-gray-200 rounded animate-pulse"></div>
+                    <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
                   </div>
                 </div>
-                <h3 className="mt-3">
-                  <a
-                    href={item.link}
-                    className="inline-block text-xl font-semibold text-black hover:text-primary mb-2"
+              ))
+            ) : (
+              filteredData.map((item, index) => {
+                const itemTitle = getLocalizedText(item.title, 'Portfolio Item');
+                const itemDescription = getLocalizedText(item.description, 'Description not available');
+                const itemImage = item.image || '/assets/img/portfolio/portfolio-01.jpg';
+                const itemLink = item.slug ? `/portfolio/${item.slug}` : (item.link || '#');
+                
+                return (
+                  <div
+                    key={item._id || index}
+                    className="group relative overflow-hidden rounded-md shadow-service"
                   >
-                    {item.title}
-                  </a>
-                </h3>
-                <p className="text-body-color text-base font-medium">
-                  {item.description}
-                </p>
-              </div>
-            ))}
+                    <div className="relative aspect-[518/291] w-full">
+                      <Image
+                        src={itemImage}
+                        alt={itemTitle}
+                        fill
+                        className="object-cover"
+                      />
+                      {/* Overlay Button */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-[#F15A29]/20 opacity-0 transition-all group-hover:opacity-100">
+                        <button
+                          className="bg-primary flex h-10 w-10 items-center justify-center rounded-full text-white"
+                          onClick={() => setModalImage(itemImage)}
+                        >
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z"
+                              fill="white"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <h3 className="mt-3">
+                      <a
+                        href={itemLink}
+                        className="inline-block text-xl font-semibold text-black hover:text-primary mb-2"
+                      >
+                        {itemTitle}
+                      </a>
+                    </h3>
+                    <p className="text-body-color text-base font-medium">
+                      {itemDescription}
+                    </p>
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
       </section>

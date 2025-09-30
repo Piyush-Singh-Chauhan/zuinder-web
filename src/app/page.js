@@ -9,7 +9,6 @@ import PortfolioSection from "@/component/Home/Portfolio";
 import Services from "@/component/Home/Service";
 import TeamSection from "@/component/Home/TeamSection";
 import TestimonialSection from "@/component/Home/Testimonial";
-import Image from "next/image";
 
 
 

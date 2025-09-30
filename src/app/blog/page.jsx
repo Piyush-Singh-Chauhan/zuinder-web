@@ -3,34 +3,115 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { useState, useEffect } from "react";
 
 export default function BlogHeader() {
-  const { t } = useLanguage();
-  const translated = t("blog.items") || [];
+  const { t, language } = useLanguage();
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const blogs = [
-    {
-      id: 1,
-      title: translated[0]?.title,
-      desc: translated[0]?.desc,
-      image: "/assets/img/blog/blog1.webp",
-      link: "/blog/exploring-the-mern-stack-powering-modern-web-development",
-    },
-    {
-      id: 2,
-      title: translated[1]?.title,
-      desc: translated[1]?.desc,
-      image: "/assets/img/blog/blog2.webp",
-      link: "/blog/best-ui-components-for-modern-websites",
-    },
-    {
-      id: 3,
-      title: translated[2]?.title,
-      desc: translated[2]?.desc,
-      image: "/assets/img/blog/blog3.webp",
-      link: "/blog/the-power-of-uiux-elevating-digital-experiences",
-    },
-  ];
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch('/api/admin/blogs');
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && Array.isArray(result.data)) {
+            const filteredBlogs = result.data.filter(blog => blog.isPublished);
+            setBlogs(filteredBlogs);
+          } else {
+            console.error('Invalid API response structure');
+            // Fallback to static data
+            const translated = t("blog.items") || [];
+            const fallbackBlogs = [
+              {
+                _id: 1,
+                slug: "exploring-the-mern-stack-powering-modern-web-development",
+                title: { [currentLanguage]: translated[0]?.title || "Blog Title 1" },
+                description: { [currentLanguage]: translated[0]?.desc || "Blog description 1" },
+                image: "/assets/img/blog/blog1.webp",
+              },
+              {
+                _id: 2,
+                slug: "best-ui-components-for-modern-websites",
+                title: { [currentLanguage]: translated[1]?.title || "Blog Title 2" },
+                description: { [currentLanguage]: translated[1]?.desc || "Blog description 2" },
+                image: "/assets/img/blog/blog2.webp",
+              },
+              {
+                _id: 3,
+                slug: "the-power-of-uiux-elevating-digital-experiences",
+                title: { [currentLanguage]: translated[2]?.title || "Blog Title 3" },
+                description: { [currentLanguage]: translated[2]?.desc || "Blog description 3" },
+                image: "/assets/img/blog/blog3.webp",
+              },
+            ];
+            setBlogs(fallbackBlogs);
+          }
+        } else {
+          console.error('Failed to fetch blogs');
+          // Fallback to static data if API fails
+          const translated = t("blog.items") || [];
+          const fallbackBlogs = [
+            {
+              _id: 1,
+              slug: "exploring-the-mern-stack-powering-modern-web-development",
+              title: { [currentLanguage]: translated[0]?.title || "Blog Title 1" },
+              description: { [currentLanguage]: translated[0]?.desc || "Blog description 1" },
+              image: "/assets/img/blog/blog1.webp",
+            },
+            {
+              _id: 2,
+              slug: "best-ui-components-for-modern-websites",
+              title: { [currentLanguage]: translated[1]?.title || "Blog Title 2" },
+              description: { [currentLanguage]: translated[1]?.desc || "Blog description 2" },
+              image: "/assets/img/blog/blog2.webp",
+            },
+            {
+              _id: 3,
+              slug: "the-power-of-uiux-elevating-digital-experiences",
+              title: { [currentLanguage]: translated[2]?.title || "Blog Title 3" },
+              description: { [currentLanguage]: translated[2]?.desc || "Blog description 3" },
+              image: "/assets/img/blog/blog3.webp",
+            },
+          ];
+          setBlogs(fallbackBlogs);
+        }
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+        // Fallback to static data on error
+        const translated = t("blog.items") || [];
+        const fallbackBlogs = [
+          {
+            _id: 1,
+            slug: "exploring-the-mern-stack-powering-modern-web-development",
+            title: { [language]: translated[0]?.title || "Blog Title 1" },
+            description: { [language]: translated[0]?.desc || "Blog description 1" },
+            image: "/assets/img/blog/blog1.webp",
+          },
+          {
+            _id: 2,
+            slug: "best-ui-components-for-modern-websites",
+            title: { [language]: translated[1]?.title || "Blog Title 2" },
+            description: { [language]: translated[1]?.desc || "Blog description 2" },
+            image: "/assets/img/blog/blog2.webp",
+          },
+          {
+            _id: 3,
+            slug: "the-power-of-uiux-elevating-digital-experiences",
+            title: { [language]: translated[2]?.title || "Blog Title 3" },
+            description: { [language]: translated[2]?.desc || "Blog description 3" },
+            image: "/assets/img/blog/blog3.webp",
+          },
+        ];
+        setBlogs(fallbackBlogs);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, [language, t]);
 
   return (
     <>
@@ -166,45 +247,71 @@ export default function BlogHeader() {
               lg:grid-cols-3
             "
           >
-            {blogs.map((blog) => (
-              <article key={blog.id} className="relative group">
-                <div className="shadow-blog flex h-full flex-col overflow-hidden rounded-xl bg-white transition-transform duration-300 hover:scale-[1.02]">
-                  {/* Blog Image */}
-                  <div className="relative block aspect-video">
-                    <Image
-                      src={blog.image}
-                      alt={blog.title}
-                      fill
-                      className="w-full object-cover duration-300 group-hover:scale-110"
-                    />
-                  </div>
-
-                  {/* Blog Content */}
-                  <div className="flex flex-1 flex-col justify-between px-4 py-6 sm:px-6 md:px-8">
-                    <div>
-                      <h3 className="mb-3 text-lg sm:text-xl font-semibold text-black line-clamp-2">
-                        <Link
-                          href={blog.link}
-                          className="hover:text-primary duration-200"
-                        >
-                          <span className="absolute inset-0" aria-hidden="true"></span>
-                          {blog.title}
-                        </Link>
-                      </h3>
-                      <p className="mb-4 text-sm sm:text-base font-medium text-gray-600 line-clamp-3">
-                        {blog.desc}
-                      </p>
+            {loading ? (
+              // Loading skeleton
+              Array.from({ length: 3 }).map((_, index) => (
+                <div key={index} className="relative group">
+                  <div className="shadow-blog flex h-full flex-col overflow-hidden rounded-xl bg-white">
+                    <div className="relative block aspect-video bg-gray-200 animate-pulse"></div>
+                    <div className="flex flex-1 flex-col justify-between px-4 py-6 sm:px-6 md:px-8">
+                      <div>
+                        <div className="mb-3 h-6 bg-gray-200 rounded animate-pulse"></div>
+                        <div className="mb-4 h-4 bg-gray-200 rounded animate-pulse"></div>
+                        <div className="mb-4 h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
+                      </div>
+                      <div className="h-4 bg-gray-200 rounded animate-pulse w-1/3"></div>
                     </div>
-                    <Link
-                      href={blog.link}
-                      className="text-sm font-medium text-[#004A70] underline hover:text-[#F15A29] hover:no-underline duration-200"
-                    >
-                      {t("blog.readMore")}
-                    </Link>
                   </div>
                 </div>
-              </article>
-            ))}
+              ))
+            ) : (
+              blogs.map((blog) => {
+                const blogTitle = blog.title?.[language] || blog.title?.en || blog.title || 'Untitled';
+                const blogDescription = blog.description?.[language] || blog.description?.en || blog.description || 'No description available';
+                const blogImage = blog.image || '/assets/img/blog/blog1.webp';
+                const blogLink = `/blog/${blog.slug || blog._id}`;
+                
+                return (
+                  <article key={blog._id} className="relative group">
+                    <div className="shadow-blog flex h-full flex-col overflow-hidden rounded-xl bg-white transition-transform duration-300 hover:scale-[1.02]">
+                      {/* Blog Image */}
+                      <div className="relative block aspect-video">
+                        <Image
+                          src={blogImage}
+                          alt={blogTitle}
+                          fill
+                          className="w-full object-cover duration-300 group-hover:scale-110"
+                        />
+                      </div>
+
+                      {/* Blog Content */}
+                      <div className="flex flex-1 flex-col justify-between px-4 py-6 sm:px-6 md:px-8">
+                        <div>
+                          <h3 className="mb-3 text-lg sm:text-xl font-semibold text-black line-clamp-2">
+                            <Link
+                              href={blogLink}
+                              className="hover:text-primary duration-200"
+                            >
+                              <span className="absolute inset-0" aria-hidden="true"></span>
+                              {blogTitle}
+                            </Link>
+                          </h3>
+                          <p className="mb-4 text-sm sm:text-base font-medium text-gray-600 line-clamp-3">
+                            {blogDescription}
+                          </p>
+                        </div>
+                        <Link
+                          href={blogLink}
+                          className="text-sm font-medium text-[#004A70] underline hover:text-[#F15A29] hover:no-underline duration-200"
+                        >
+                          {t("blog.readMore")}
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })
+            )}
           </div>
         </div>
       </section>

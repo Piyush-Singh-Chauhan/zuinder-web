@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
@@ -8,6 +8,7 @@ export default function Header() {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [pagesDropdownOpen, setPagesDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { t, language, setLanguage } = useLanguage();
 
   const handleSelectLang = (lang) => {
@@ -17,13 +18,33 @@ export default function Header() {
     setLangOpen(false);
   };
 
+  // Scroll listener
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="absolute top-0 left-0 z-40 w-full transition">
+    <header
+      className={`top-0 left-0 z-40 w-full transition-all duration-500 ease-in-out ${
+        scrolled
+          ? "fixed bg-[#004A70]/90 backdrop-blur-md shadow-lg"
+          : "absolute bg-[#004A70]"
+      }`}
+    >
       <div className="mx-auto w-full px-4 xl:container">
         <div className="relative -mx-4 flex items-center justify-between">
           {/* Logo */}
-          <div className="w-52 max-w-full px-4 xl:w-60">
-            <a className="block w-full py-6 lg:py-8" href="/">
+          <div className="w-52 max-w-full px-4 xl:w-60 transition-all duration-500 ease-in-out">
+            <a
+              className={`block w-full ${
+                scrolled ? "py-4" : "py-6 lg:py-8"
+              } transition-all duration-500`}
+              href="/"
+            >
               <Image
                 src="/assets/img/logo/logo.jpeg"
                 alt="logo"
@@ -43,7 +64,7 @@ export default function Header() {
                 className="absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-1.5 lg:hidden focus:ring-2"
                 onClick={() => {
                   setNavbarOpen(!navbarOpen);
-                  setPagesDropdownOpen(false); // close submenu when toggling nav
+                  setPagesDropdownOpen(false);
                 }}
               >
                 <span className="block h-[2px] w-[30px] my-1 bg-white"></span>
@@ -66,7 +87,7 @@ export default function Header() {
                     <li key={item.name} className="group relative lg:px-5">
                       <a
                         href={item.href}
-                        className="flex py-2 text-base text-darkBlue lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 hover:text-orangeBrand transition-colors"
+                        className="flex py-2 text-base text-darkBlue lg:py-6 hover:text-orangeBrand transition-colors"
                       >
                         {item.name}
                       </a>
@@ -76,9 +97,8 @@ export default function Header() {
                   {/* Pages Dropdown */}
                   <li className="group relative lg:px-5">
                     <button
-                      className="flex w-full items-center justify-between py-2 text-base text-darkBlue lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 hover:text-orangeBrand transition-colors"
+                      className="flex w-full items-center justify-between py-2 text-base text-darkBlue lg:py-6 hover:text-orangeBrand transition-colors"
                       onClick={() => {
-                        // Toggle only in mobile view
                         if (window.innerWidth < 1024) {
                           setPagesDropdownOpen(!pagesDropdownOpen);
                         }
@@ -100,13 +120,9 @@ export default function Header() {
                     </button>
 
                     <ul
-                      className={`
-                        ${pagesDropdownOpen ? "block" : "hidden"}
-                        lg:group-hover:block
-                        lg:absolute lg:top-full lg:left-0 lg:w-[250px]
-                        lg:rounded-sm lg:bg-[#004A70] lg:p-4 lg:shadow-lg
-                        z-50
-                      `}
+                      className={`transition-all duration-300 ${
+                        pagesDropdownOpen ? "block" : "hidden"
+                      } lg:group-hover:block lg:absolute lg:top-full lg:left-0 lg:w-[250px] lg:rounded-sm lg:bg-[#004A70] lg:p-4 lg:shadow-lg z-50`}
                     >
                       {[
                         { name: t("nav.home"), href: "/" },
@@ -114,7 +130,6 @@ export default function Header() {
                         { name: t("nav.portfolioPage"), href: "/portfolio" },
                         { name: t("nav.blogPage"), href: "/blog" },
                         { name: t("nav.contactPage"), href: "/contact" },
-                        // { name: t("nav.error"), href: "/error" },
                       ].map((sub) => (
                         <li key={sub.name}>
                           <a
@@ -146,16 +161,12 @@ export default function Header() {
                 >
                   {language === "en" ? (
                     <>
-                      <span role="img" aria-label="UK flag">
-                        🇬🇧
-                      </span>
+                      <span role="img" aria-label="UK flag">🇬🇧</span>
                       English
                     </>
                   ) : (
                     <>
-                      <span role="img" aria-label="Portuguese flag">
-                        🇵🇹
-                      </span>
+                      <span role="img" aria-label="Portuguese flag">🇵🇹</span>
                       Português
                     </>
                   )}
@@ -166,11 +177,7 @@ export default function Header() {
                     strokeWidth="2"
                     viewBox="0 0 24 24"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 9l-7 7-7-7"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
 
@@ -181,19 +188,13 @@ export default function Header() {
                         onClick={() => handleSelectLang("en")}
                         className="flex items-center gap-2 w-full px-4 py-2 text-black text-sm text-left hover:bg-gray-100"
                       >
-                        <span role="img" aria-label="UK flag">
-                          🇬🇧
-                        </span>
-                        English
+                        🇬🇧 English
                       </button>
                       <button
                         onClick={() => handleSelectLang("pt")}
                         className="flex items-center gap-2 w-full px-4 py-2 text-black text-sm text-left hover:bg-gray-100"
                       >
-                        <span role="img" aria-label="Portuguese flag">
-                          🇵🇹
-                        </span>
-                        Português
+                        🇵🇹 Português
                       </button>
                     </div>
                   </div>
@@ -203,10 +204,10 @@ export default function Header() {
               {/* CTA */}
               <a
                 href="/contact"
-                className="px-8 py-3 rounded-full font-medium text-white 
-                             [background:linear-gradient(98deg,#e46703_-1.68%,#c7340d_103.45%)] 
-                             hover:[background:linear-gradient(98deg,#c7340d_-1.68%,#e46703_103.45%)] 
-                             transition duration-300 disabled:opacity-50"
+                className="px-8 py-3 rounded-full font-medium text-white
+                             [background:linear-gradient(98deg,#e46703_-1.68%,#c7340d_103.45%)]
+                             hover:[background:linear-gradient(98deg,#c7340d_-1.68%,#e46703_103.45%)]
+                             transition duration-500 ease-in-out"
               >
                 {t("cta.quote")}
               </a>

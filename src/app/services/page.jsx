@@ -1,25 +1,53 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 export default function ServiceDetails() {
-  const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState("website-development");
+  const { t, language } = useLanguage();
+  const [activeTab, setActiveTab] = useState("");
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const tabs = (t("services.tabs") || []).map((tab) => ({
-    id: tab.id,
-    label: tab.label,
-    image: tab.image,
-    title: tab.title,
-    description1: tab.description1,
-    description2: tab.description2,
-    marketing: tab.marketing,
-    branding: tab.branding,
-  }));
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch('/api/admin/services');
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && Array.isArray(result.data) && result.data.length > 0) {
+            // Filter active services and sort by order
+            const activeServices = result.data
+              .filter(service => service.isActive)
+              .sort((a, b) => (a.order || 0) - (b.order || 0));
+            
+            setServices(activeServices);
+            
+            // Set first service as active tab if available
+            if (activeServices.length > 0) {
+              setActiveTab(activeServices[0]._id);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching services:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const currentTab = tabs.find((tab) => tab.id === activeTab);
+    fetchServices();
+  }, [language, t]);
+
+  // Helper function to get localized text
+  const getLocalizedText = (textObj, fallback = '') => {
+    if (!textObj) return fallback;
+    if (typeof textObj === 'string') return textObj;
+    return textObj[language] || textObj.en || textObj.pt || fallback;
+  };
+
+  const currentService = services.find((service) => service._id === activeTab);
 
   return (
     <>
@@ -152,35 +180,44 @@ export default function ServiceDetails() {
                   {t("services.sidebarTitle")}
                 </h3>
                 <div className="border-gray-300 rounded-xs border">
-                  {tabs.map((tab) => (
-                    <a
-                      key={tab.id}
-                      href={`#${tab.id}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setActiveTab(tab.id);
-                      }}
-                      className={`flex w-full items-center gap-3 border-b border-gray-300 px-5 py-4 text-lg font-medium duration-200 last:border-0 hover:text-[#c93b0c] ${
-                        activeTab === tab.id
-                          ? "text-[#c93b0c] font-semibold"
-                          : "text-black"
-                      }`}
-                    >
-                      <svg
-                        width="22"
-                        height="22"
-                        viewBox="0 0 22 22"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M19.8 10.45L12.6844 3.2313C12.375 2.92192 11.8938 2.92192 11.5844 3.2313C11.275 3.54067 11.275 4.02192 11.5844 4.3313L17.3594 10.2094H2.75002C2.33752 10.2094 1.99377 10.5532 1.99377 10.9657C1.99377 11.3782 2.33752 11.7563 2.75002 11.7563H17.4282L11.5844 17.7032C11.275 18.0126 11.275 18.4938 11.5844 18.8032C11.7219 18.9407 11.9282 19.0094 12.1344 19.0094C12.3407 19.0094 12.5469 18.9407 12.6844 18.7688L19.8 11.55C20.1094 11.2407 20.1094 10.7594 19.8 10.45Z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                      {tab.label}
-                    </a>
-                  ))}
+                  {loading ? (
+                    // Loading skeleton for sidebar
+                    Array.from({ length: 3 }).map((_, index) => (
+                      <div key={index} className="flex w-full items-center gap-3 border-b border-gray-300 px-5 py-4 last:border-0">
+                        <div className="w-6 h-6 bg-gray-200 rounded animate-pulse"></div>
+                        <div className="h-5 bg-gray-200 rounded animate-pulse flex-1"></div>
+                      </div>
+                    ))
+                  ) : (
+                    services.map((service) => {
+                      const serviceTitle = getLocalizedText(service.title, 'Service');
+                      return (
+                        <button
+                          key={service._id}
+                          onClick={() => setActiveTab(service._id)}
+                          className={`flex w-full items-center gap-3 border-b border-gray-300 px-5 py-4 text-lg font-medium duration-200 last:border-0 hover:text-[#c93b0c] text-left ${
+                            activeTab === service._id
+                              ? "text-[#c93b0c] font-semibold"
+                              : "text-black"
+                          }`}
+                        >
+                          <svg
+                            width="22"
+                            height="22"
+                            viewBox="0 0 22 22"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M19.8 10.45L12.6844 3.2313C12.375 2.92192 11.8938 2.92192 11.5844 3.2313C11.275 3.54067 11.275 4.02192 11.5844 4.3313L17.3594 10.2094H2.75002C2.33752 10.2094 1.99377 10.5532 1.99377 10.9657C1.99377 11.3782 2.33752 11.7563 2.75002 11.7563H17.4282L11.5844 17.7032C11.275 18.0126 11.275 18.4938 11.5844 18.8032C11.7219 18.9407 11.9282 19.0094 12.1344 19.0094C12.3407 19.0094 12.5469 18.9407 12.6844 18.7688L19.8 11.55C20.1094 11.2407 20.1094 10.7594 19.8 10.45Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                          {serviceTitle}
+                        </button>
+                      );
+                    })
+                  )}
                 </div>
               </div>
 
@@ -203,55 +240,78 @@ export default function ServiceDetails() {
 
             {/* Main Content */}
             <div className="w-full px-5 lg:w-8/12">
-              <div>
-                <div className="relative mb-8 aspect-[34/20] rounded-xs bg-stone-100">
-                  <Image
-                    src={currentTab.image}
-                    alt={currentTab.title}
-                    fill
-                    className="object-cover object-center rounded-xs"
-                    sizes="100vw"
-                  />
+              {loading ? (
+                // Loading skeleton for main content
+                <div>
+                  <div className="relative mb-8 aspect-[34/20] rounded-xs bg-gray-200 animate-pulse"></div>
+                  <div className="mb-7 h-8 bg-gray-200 rounded animate-pulse"></div>
+                  <div className="mb-8 h-4 bg-gray-200 rounded animate-pulse"></div>
+                  <div className="mb-10 h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
+                  <div className="mb-8 h-6 bg-gray-200 rounded animate-pulse w-1/2"></div>
+                  <div className="space-y-3">
+                    <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+                    <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+                    <div className="h-4 bg-gray-200 rounded animate-pulse w-2/3"></div>
+                  </div>
                 </div>
-                <h1 className="mb-7 text-2xl font-bold text-black sm:text-4xl lg:text-3xl">
-                  {currentTab.title}
-                </h1>
-                <p className="mb-8 text-base text-body-color sm:text-lg lg:text-base xl:text-lg text-gray-500">
-                  {currentTab.description1}
-                </p>
-                <p className="mb-10 text-base text-body-color sm:text-lg lg:text-base xl:text-lg text-gray-500">
-                  {currentTab.description2}
-                </p>
+              ) : currentService ? (
+                <div>
+                  {currentService.image && (
+                    <div className="relative mb-8 aspect-[34/20] rounded-xs bg-stone-100">
+                      <Image
+                        src={currentService.image}
+                        alt={getLocalizedText(currentService.title, 'Service')}
+                        fill
+                        className="object-cover object-center rounded-xs"
+                        sizes="100vw"
+                      />
+                    </div>
+                  )}
+                  <h1 className="mb-7 text-2xl font-bold text-black sm:text-4xl lg:text-3xl">
+                    {getLocalizedText(currentService.title, 'Service Title')}
+                  </h1>
+                  <p className="mb-8 text-base text-body-color sm:text-lg lg:text-base xl:text-lg text-gray-500">
+                    {getLocalizedText(currentService.description, 'Service description')}
+                  </p>
+                  
+                  {/* Features */}
+                  {currentService.features && (
+                    <div>
+                      <h4 className="mb-8 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
+                        <span className="text-primary text-[#e85a28]">01.</span>{" "}
+                        {getLocalizedText(currentService.featuresHeading, "Features")}
+                      </h4>
+                      <ul className="mb-7 list-inside list-disc marker:text-[#e85b27] text-gray-500">
+                        {(getLocalizedText(currentService.features) || []).map((item, idx) => (
+                          <li
+                            key={idx}
+                            className="mb-3 text-base text-body-color sm:text-lg lg:text-base xl:text-lg"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
-                {/* Marketing Solutions */}
-                <h4 className="mb-8 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
-                  <span className="text-primary text-[#e85a28]">01.</span>{" "}
-                  {t("services.marketing")}
-                </h4>
-                <ul className="mb-7 list-inside list-disc marker:text-[#e85b27] text-gray-500">
-                  {currentTab.marketing.map((item, idx) => (
-                    <li
-                      key={idx}
-                      className="mb-3 text-base text-body-color sm:text-lg lg:text-base xl:text-lg"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                <p className="mb-10 text-base text-body-color sm:text-lg lg:text-base xl:text-lg text-gray-500">
-                  {t("services.extraParagraph")}
-                </p>
-
-                {/* Branding Solutions */}
-                <h4 className="mb-8 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
-                  <span className="text-primary text-[#e85a28]">02.</span>{" "}
-                  {t("services.branding")}
-                </h4>
-                <p className="mb-8 text-base text-body-color sm:text-lg lg:text-base xl:text-lg text-gray-500">
-                  {currentTab.branding}
-                </p>
-              </div>
+                  {/* Price */}
+                  {currentService.price && (
+                    <div className="mb-10">
+                      <h4 className="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">
+                        <span className="text-primary text-[#e85a28]">02.</span>{" "}
+                        {getLocalizedText(currentService.pricingHeading, "Pricing")}
+                      </h4>
+                      <p className="text-base text-body-color sm:text-lg lg:text-base xl:text-lg text-gray-500">
+                        {currentService.price}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="text-center py-10">
+                  <p className="text-gray-500">No services available</p>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -95,7 +95,7 @@ export default function NewsletterSection() {
                 <div className="flex-1 w-full">
                   <input
                     id="email"
-                    type="text"
+                    type="email"
                     name="email"
                     placeholder={t("newsletter.placeholder")}
                     maxLength={50}
@@ -111,7 +111,6 @@ export default function NewsletterSection() {
                           : "border-white/20 bg-white/15 text-white placeholder-white/70"
                       }`}
                     required
-                    
                   />
 
                   {errors.email && (
@@ -119,11 +118,15 @@ export default function NewsletterSection() {
                       {errors.email}
                     </p>
                   )}
+                  {!errors.email && email.length > 0 && (
+                    <p className="text-white/70 text-xs mt-1">{email.length}/50 characters</p>
+                  )}
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full sm:w-auto rounded-full bg-white px-6 py-3 text-sm md:text-base font-semibold text-primary transition hover:bg-[#004A70] hover:text-white"
+                  disabled={!email || errors.email}
+                  className="w-full sm:w-auto rounded-full bg-white px-6 py-3 text-sm md:text-base font-semibold text-primary transition hover:bg-[#004A70] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {t("newsletter.subscribe")}
                 </button>

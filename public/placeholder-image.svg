@@ -1,0 +1,14 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#f3f4f6"/>
+      <rect width="10" height="10" fill="#e5e7eb"/>
+      <rect x="10" y="10" width="10" height="10" fill="#e5e7eb"/>
+    </pattern>
+  </defs>
+  <rect width="200" height="200" fill="url(#pattern)"/>
+  <rect x="75" y="75" width="50" height="50" fill="#9ca3af" rx="5"/>
+  <circle cx="85" cy="85" r="3" fill="#6b7280"/>
+  <polygon points="110,110 90,95 75,110" fill="#6b7280"/>
+  <text x="100" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">Image Preview</text>
+</svg>

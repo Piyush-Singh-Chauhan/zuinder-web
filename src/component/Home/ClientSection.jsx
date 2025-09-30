@@ -60,7 +60,7 @@ export default function ClientsSection() {
 
         {/* Clients Logos */}
         <div className="w-full px-4">
-          <div className="flex flex-wrap items-center py-10 justify-center gap-6">
+          <div className="flex flex-wrap items-center py-10 justify-center gap-4 sm:gap-4 lg:gap-6">
             {clients.map((client, index) => (
               <a
                 key={index}

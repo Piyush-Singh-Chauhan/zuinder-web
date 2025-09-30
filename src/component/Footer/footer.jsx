@@ -41,7 +41,6 @@ export default function Footer() {
               </ul>
             </div>
           </div>
-
           {/* News */}
           <div className="w-full px-4 md:w-1/2 lg:w-2/12">
             <div className="mb-10">
