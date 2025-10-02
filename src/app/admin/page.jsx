@@ -6,6 +6,7 @@ import LoadingSpinner from "@/components/admin/LoadingSpinner";
 
 export default function AdminDashboard() {
   const [dashboardData, setDashboardData] = useState(null);
+  const [additionalCounts, setAdditionalCounts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -15,14 +16,24 @@ export default function AdminDashboard() {
 
   const fetchDashboardData = async () => {
     try {
-      const response = await fetch("/api/admin/dashboard");
-      const data = await response.json();
+      const [dashboardResponse, countsResponse] = await Promise.all([
+        fetch("/api/admin/dashboard"),
+        fetch("/api/admin/dashboard/counts")
+      ]);
       
-      if (data.success) {
-        setDashboardData(data.data);
+      const dashboardData = await dashboardResponse.json();
+      const countsData = await countsResponse.json();
+      
+      if (dashboardData.success) {
+        setDashboardData(dashboardData.data);
       } else {
-        setError(data.message || "Failed to fetch dashboard data");
+        setError(dashboardData.message || "Failed to fetch dashboard data");
       }
+      
+      if (countsData.success) {
+        setAdditionalCounts(countsData.data);
+      }
+      
     } catch (error) {
       console.error("Dashboard fetch error:", error);
       setError("Network error occurred");
@@ -48,6 +59,7 @@ export default function AdminDashboard() {
   }
 
   const { stats, recent } = dashboardData || {};
+  const { services, teamMembers } = additionalCounts || {};
 
   const statCards = [
     {
@@ -65,6 +77,22 @@ export default function AdminDashboard() {
       icon: "💼",
       color: "bg-green-500",
       link: "/admin/portfolio"
+    },
+    {
+      title: "Services",
+      value: services?.total || 0,
+      subtitle: "Total services",
+      icon: "⚙️",
+      color: "bg-yellow-500",
+      link: "/admin/services"
+    },
+    {
+      title: "Team Members",
+      value: teamMembers?.total || 0,
+      subtitle: "Total members",
+      icon: "👥",
+      color: "bg-indigo-500",
+      link: "/admin/team"
     },
     {
       title: "Contact Messages",
@@ -99,7 +127,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {statCards.map((card, index) => (
           <Link key={index} href={card.link}>
             <div className="bg-white overflow-hidden shadow rounded-lg hover:shadow-lg transition-shadow cursor-pointer h-full">

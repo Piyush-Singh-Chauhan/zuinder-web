@@ -80,9 +80,11 @@ export default function Header() {
               >
                 <ul className="block font-bold lg:flex">
                   {[
-                    { name: t("nav.about"), href: "/#about" },
-                    { name: t("nav.services"), href: "/#services" },
-                    { name: t("nav.portfolio"), href: "/#portfolio" },
+                  { name: t("nav.home"), href: "/" },
+                        { name: t("nav.servicesPage"), href: "/services" },
+                        { name: t("nav.portfolioPage"), href: "/portfolio" },
+                        { name: t("nav.blogPage"), href: "/blog" },
+                        { name: t("nav.contactPage"), href: "/contact" },
                   ].map((item) => (
                     <li key={item.name} className="group relative lg:px-5">
                       <a
@@ -94,56 +96,63 @@ export default function Header() {
                     </li>
                   ))}
 
-                  {/* Pages Dropdown */}
-                  <li className="group relative lg:px-5">
-                    <button
-                      className="flex w-full items-center justify-between py-2 text-base text-darkBlue lg:py-6 hover:text-orangeBrand transition-colors"
-                      onClick={() => {
-                        if (window.innerWidth < 1024) {
-                          setPagesDropdownOpen(!pagesDropdownOpen);
-                        }
-                      }}
-                    >
-                      {t("nav.pages")}
-                      <span className="pl-3">
-                        <svg
-                          width="14"
-                          height="8"
-                          viewBox="0 0 14 8"
-                          className={`fill-current duration-200 ${
-                            pagesDropdownOpen ? "-scale-y-100" : ""
-                          }`}
-                        >
-                          <path d="M6.54564 5.09128L11.6369 0L13.0913 1.45436L6.54564 8L0 1.45436L1.45436 0L6.54564 5.09128Z"></path>
-                        </svg>
-                      </span>
-                    </button>
-
-                    <ul
-                      className={`transition-all duration-300 ${
-                        pagesDropdownOpen ? "block" : "hidden"
-                      } lg:group-hover:block lg:absolute lg:top-full lg:left-0 lg:w-[250px] lg:rounded-sm lg:bg-[#004A70] lg:p-4 lg:shadow-lg z-50`}
-                    >
-                      {[
-                        { name: t("nav.home"), href: "/" },
-                        { name: t("nav.servicesPage"), href: "/services" },
-                        { name: t("nav.portfolioPage"), href: "/portfolio" },
-                        { name: t("nav.blogPage"), href: "/blog" },
-                        { name: t("nav.contactPage"), href: "/contact" },
-                      ].map((sub) => (
-                        <li key={sub.name}>
-                          <a
-                            href={sub.href}
-                            className="block rounded-sm px-4 py-2 text-md text-black hover:text-orangeBrand"
-                          >
-                            {sub.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
                 </ul>
               </nav>
+            </div>
+
+            {/* Language Dropdown - Always visible */}
+            <div className="flex sm:hidden items-center justify-end gap-4 pr-16 lg:pr-0">
+              <div className="relative">
+                <button
+                  onClick={() => setLangOpen(!langOpen)}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-md border border-darkBlue transition duration-300
+                    ${
+                      langOpen
+                        ? "text-black bg-white"
+                        : "text-darkBlue hover:bg-darkBlue hover:text-white"
+                    }`}
+                >
+                  {language === "en" ? (
+                    <>
+                      <span role="img" aria-label="UK flag">🇬🇧</span>
+                      English
+                    </>
+                  ) : (
+                    <>
+                      <span role="img" aria-label="Portuguese flag">🇵🇹</span>
+                      Português
+                    </>
+                  )}
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {langOpen && (
+                  <div className="absolute right-0 mt-2 w-35 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div className="py-1">
+                      <button
+                        onClick={() => handleSelectLang("en")}
+                        className="flex items-center gap-2 w-full px-4 py-2 text-black text-sm text-left hover:bg-gray-100"
+                      >
+                        🇬🇧 English
+                      </button>
+                      <button
+                        onClick={() => handleSelectLang("pt")}
+                        className="flex items-center gap-2 w-full px-4 py-2 text-black text-sm text-left hover:bg-gray-100"
+                      >
+                        🇵🇹 Português
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Right buttons */}

@@ -1,8 +1,3 @@
-# Zuinder Web
-
-Zuinder Web is a modern, high-performance web application built with Next.js 15. It supports server-side rendering (SSR), static site generation (SSG), and internationalization (i18n) with English and Portuguese translations. Designed to be fully responsive and production-ready, it offers an optimized developer workflow and a smooth user experience.
-
-
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

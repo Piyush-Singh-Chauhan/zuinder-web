@@ -47,7 +47,8 @@ export default function PortfolioSection() {
       const data = await response.json();
       
       if (data.success && data.data.length > 0) {
-        setPortfolioItems(data.data);
+        // Limit to 4 portfolio items for home page
+        setPortfolioItems(data.data.slice(0, 4));
       } else {
         // Fallback to static data if no portfolio items from API
         const translated = t("portfolioHome.items") || [];
@@ -58,7 +59,7 @@ export default function PortfolioSection() {
           description: transItem.description,
           image: portfolioDataStatic[idx]?.image,
           link: portfolioDataStatic[idx]?.link,
-        }));
+        })).slice(0, 4); // Limit to 4 items
         setPortfolioItems(fallbackItems);
       }
     } catch (error) {
@@ -72,12 +73,27 @@ export default function PortfolioSection() {
         description: transItem.description,
         image: portfolioDataStatic[idx]?.image,
         link: portfolioDataStatic[idx]?.link,
-      }));
+      })).slice(0, 4); // Limit to 4 items
       setPortfolioItems(fallbackItems);
     } finally {
       setLoading(false);
     }
   };
+
+  // Get unique categories from portfolio items (same as portfolio page)
+  const dynamicFilters = ['All', ...new Set(portfolioItems.map(item => 
+    item.category?.[language] || item.category?.en || item.category || 'Uncategorized'
+  ).filter(Boolean))];
+
+  // Use dynamic filters if available, otherwise fallback to translation filters
+  const availableFilters = dynamicFilters.length > 1 ? dynamicFilters : (t("portfolioHome.filters") || []);
+
+  const filteredData = selectedFilterIndex === 0 
+    ? portfolioItems 
+    : portfolioItems.filter((item) => {
+        const itemCategory = getLocalizedText(item.category, 'Uncategorized');
+        return itemCategory === (availableFilters[selectedFilterIndex] || filters[selectedFilterIndex]);
+      });
 
   // Build i18n-aware data
   const i18nItems = portfolioItems.map((item) => ({
@@ -91,11 +107,6 @@ export default function PortfolioSection() {
 
   const filters = t("portfolioHome.filters") || [];
   const activeFilterLabel = filters[selectedFilterIndex] || "";
-
-  const filteredData =
-    selectedFilterIndex === 0
-      ? i18nItems
-      : i18nItems.filter((item) => item.category === activeFilterLabel);
 
   return (
     <section id="portfolio" className="bg-[#f8f9ff] py-[70px] sm:py-[90px] lg:py-[120px] ">
@@ -117,13 +128,13 @@ export default function PortfolioSection() {
 
         {/* Filter Buttons */}
         <div className="w-full px-4 mb-12 flex flex-wrap justify-center gap-2">
-          {filters.map((filter, idx) => (
+          {availableFilters.map((filter, index) => (
             <button
-              key={idx}
-              onClick={() => setSelectedFilterIndex(idx)}
-              className={`mb-2 rounded-full px-5 py-2 text-sm sm:text-base font-semibold capitalize transition ${
-                selectedFilterIndex === idx
-                  ? "bg-[#004A70] text-white"
+              key={index}
+              onClick={() => setSelectedFilterIndex(index)}
+              className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                selectedFilterIndex === index
+                   ? "bg-[#004A70] text-white"
                   : "text-body-color hover:bg-[#004A70]/5 hover:text-[#004A70]"
               }`}
             >
@@ -139,44 +150,57 @@ export default function PortfolioSection() {
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#F15A29]"></div>
             </div>
           ) : (
-            filteredData.map((item, index) => (
-              <div key={item._id || index} className="group relative overflow-hidden rounded-md shadow-service">
-                <div className="relative aspect-[518/291] w-full">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                  />
-                  {/* Overlay Button */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-[#F15A29]/20 opacity-0 transition-all group-hover:opacity-100">
-                    <button
-                      className="bg-primary flex h-10 w-10 items-center justify-center rounded-full text-white"
-                      onClick={() => setModalImage(item.image)}
-                    >
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+            (selectedFilterIndex === 0 
+              ? portfolioItems 
+              : portfolioItems.filter((item) => {
+                  const itemCategory = getLocalizedText(item.category, 'Uncategorized');
+                  return itemCategory === (availableFilters[selectedFilterIndex] || filters[selectedFilterIndex]);
+                })
+            ).map((item, index) => {
+              const itemTitle = getLocalizedText(item.title, 'Portfolio Item');
+              const itemDescription = getLocalizedText(item.description, 'Description not available');
+              const itemImage = item.image || '/assets/img/portfolio/portfolio-01.jpg';
+              const itemLink = item.link || '#';
+              
+              return (
+                <div key={item._id || index} className="group relative overflow-hidden rounded-md shadow-service">
+                  <div className="relative aspect-[518/291] w-full">
+                    <Image
+                      src={itemImage}
+                      alt={itemTitle}
+                      fill
+                      className="object-cover"
+                    />
+                    {/* Overlay Button */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-[#F15A29]/20 opacity-0 transition-all group-hover:opacity-100">
+                      <button
+                        className="bg-primary flex h-10 w-10 items-center justify-center rounded-full text-white"
+                        onClick={() => setModalImage(itemImage)}
                       >
-                        <path d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z" fill="white" />
-                      </svg>
-                    </button>
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z" fill="white" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
+                  <h3 className="mt-3">
+                    <a
+                      href={itemLink}
+                      className="inline-block text-xl font-semibold text-black hover:text-primary mb-2"
+                    >
+                      {itemTitle}
+                    </a>
+                  </h3>
+                  <p className="text-body-color text-base font-medium">{itemDescription}</p>
                 </div>
-                <h3 className="mt-3">
-                  <a
-                    href={item.link}
-                    className="inline-block text-xl font-semibold text-black hover:text-primary mb-2"
-                  >
-                    {item.title}
-                  </a>
-                </h3>
-                <p className="text-body-color text-base font-medium">{item.description}</p>
-              </div>
-            ))
+              );
+            })
           )}
         </div>
       </div>

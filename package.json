@@ -2,11 +2,14 @@
   "name": "zuinder",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev -p 2104",
     "build": "next build",
     "start": "next start -p 2104",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:team": "node src/scripts/seedTeamMembers.js",
+    "migrate:team": "node src/scripts/migrateTeamMembers.js"
   },
   "dependencies": {
     "aos": "^2.3.4",
@@ -24,6 +27,8 @@
     "react-dom": "19.1.0",
     "react-i18next": "^15.7.3",
     "react-phone-input-2": "^2.15.1",
+    "react-slick": "^0.31.0",
+    "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.23.0"
   },
   "devDependencies": {

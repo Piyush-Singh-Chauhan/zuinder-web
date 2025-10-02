@@ -24,8 +24,31 @@ export default function ServiceDetails() {
             
             setServices(activeServices);
             
-            // Set first service as active tab if available
-            if (activeServices.length > 0) {
+            // Check if there's a hash in the URL to select a specific service
+            if (typeof window !== 'undefined') {
+              const hash = window.location.hash.replace('#', '');
+              if (hash) {
+                // Find service by ID from hash
+                const serviceFromHash = activeServices.find(service => service._id === hash);
+                if (serviceFromHash) {
+                  setActiveTab(serviceFromHash._id);
+                  // Scroll to the content area
+                  setTimeout(() => {
+                    const element = document.getElementById('service-content');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }, 100);
+                } else {
+                  // Set first service as active tab if hash service not found
+                  setActiveTab(activeServices[0]._id);
+                }
+              } else {
+                // Set first service as active tab if no hash
+                setActiveTab(activeServices[0]._id);
+              }
+            } else {
+              // Server-side rendering fallback
               setActiveTab(activeServices[0]._id);
             }
           }
@@ -255,7 +278,7 @@ export default function ServiceDetails() {
                   </div>
                 </div>
               ) : currentService ? (
-                <div>
+                <div id="service-content">
                   {currentService.image && (
                     <div className="relative mb-8 aspect-[34/20] rounded-xs bg-stone-100">
                       <Image

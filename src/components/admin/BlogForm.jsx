@@ -195,6 +195,7 @@ export default function BlogForm({ initialData = null, isEdit = false }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(apiData),
+        credentials: "include" // Include cookies with the request
       });
 
       const data = await response.json();

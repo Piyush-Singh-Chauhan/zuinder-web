@@ -24,16 +24,16 @@ export default function ContactsPage() {
     try {
       const params = new URLSearchParams({
         page: currentPage.toString(),
-        limit: "10"
+        limit: "10",
       });
-      
+
       if (searchTerm) {
         params.append("search", searchTerm);
       }
 
       const response = await fetch(`/api/admin/contacts?${params}`);
       const data = await response.json();
-      
+
       if (data.success) {
         setContacts(data.data);
         setPagination(data.pagination);
@@ -63,9 +63,9 @@ export default function ContactsPage() {
       });
 
       const data = await response.json();
-      
+
       if (data.success) {
-        setContacts(contacts.filter(contact => contact._id !== itemToDelete));
+        setContacts(contacts.filter((contact) => contact._id !== itemToDelete));
         setError(""); // Clear any previous errors
       } else {
         setError(data.message || "Failed to delete contact");
@@ -96,7 +96,7 @@ export default function ContactsPage() {
       month: "short",
       day: "numeric",
       hour: "2-digit",
-      minute: "2-digit"
+      minute: "2-digit",
     });
   };
 
@@ -140,9 +140,13 @@ export default function ContactsPage() {
             {contacts.length === 0 ? (
               <div className="text-center py-12">
                 <div className="text-gray-400 text-6xl mb-4">📧</div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">No contact messages found</h3>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  No contact messages found
+                </h3>
                 <p className="text-gray-500">
-                  {searchTerm ? "No contacts match your search." : "No contact form submissions yet."}
+                  {searchTerm
+                    ? "No contacts match your search."
+                    : "No contact form submissions yet."}
                 </p>
               </div>
             ) : (
@@ -163,7 +167,7 @@ export default function ContactsPage() {
                                 </span>
                               )}
                             </div>
-                            <div className="mt-1 flex items-center space-x-4 text-sm text-gray-500">
+                            <div className="mt-1 flex flex-col text-sm text-gray-500">
                               <span>📧 {contact.email}</span>
                               <span>📱 {contact.phone}</span>
                             </div>
@@ -176,7 +180,7 @@ export default function ContactsPage() {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center space-x-4">
                         {/* Actions */}
                         <div className="flex items-center space-x-2">
@@ -191,7 +195,9 @@ export default function ContactsPage() {
                             disabled={deleteLoading === contact._id}
                             className="text-red-600 hover:text-red-800 text-sm font-medium disabled:opacity-50"
                           >
-                            {deleteLoading === contact._id ? "Deleting..." : "Delete"}
+                            {deleteLoading === contact._id
+                              ? "Deleting..."
+                              : "Delete"}
                           </button>
                         </div>
                       </div>
@@ -214,7 +220,11 @@ export default function ContactsPage() {
                   Previous
                 </button>
                 <button
-                  onClick={() => setCurrentPage(Math.min(pagination.totalPages, currentPage + 1))}
+                  onClick={() =>
+                    setCurrentPage(
+                      Math.min(pagination.totalPages, currentPage + 1)
+                    )
+                  }
                   disabled={!pagination.hasNext}
                   className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
@@ -224,22 +234,29 @@ export default function ContactsPage() {
               <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                 <div>
                   <p className="text-sm text-gray-700">
-                    Showing page <span className="font-medium">{currentPage}</span> of{" "}
-                    <span className="font-medium">{pagination.totalPages}</span>
-                    {" "}({pagination.totalContacts} total contacts)
+                    Showing page{" "}
+                    <span className="font-medium">{currentPage}</span> of{" "}
+                    <span className="font-medium">{pagination.totalPages}</span>{" "}
+                    ({pagination.totalContacts} total contacts)
                   </p>
                 </div>
                 <div>
                   <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
                     <button
-                      onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                      onClick={() =>
+                        setCurrentPage(Math.max(1, currentPage - 1))
+                      }
                       disabled={!pagination.hasPrev}
                       className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Previous
                     </button>
                     <button
-                      onClick={() => setCurrentPage(Math.min(pagination.totalPages, currentPage + 1))}
+                      onClick={() =>
+                        setCurrentPage(
+                          Math.min(pagination.totalPages, currentPage + 1)
+                        )
+                      }
                       disabled={!pagination.hasNext}
                       className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
@@ -252,7 +269,7 @@ export default function ContactsPage() {
           )}
         </>
       )}
-      
+
       {/* Confirmation Dialog */}
       <ConfirmationDialog
         isOpen={showConfirmDialog}

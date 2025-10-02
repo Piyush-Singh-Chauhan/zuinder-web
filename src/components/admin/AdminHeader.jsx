@@ -9,6 +9,8 @@ function getPageTitle(pathname) {
   if (pathname.startsWith("/admin/portfolio")) return "Portfolio Management";
   if (pathname.startsWith("/admin/contacts")) return "Contact Messages";
   if (pathname.startsWith("/admin/newsletter")) return "Newsletter Subscribers";
+  if (pathname.startsWith("/admin/team-members")) return "Team Management";
+  if (pathname.startsWith("/admin/services")) return "Service Management"
   return "Admin Panel";
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
@@ -8,12 +8,19 @@ import { useLanguage } from "@/i18n/LanguageProvider";
 
 export default function HeroSection() {
   const { t } = useLanguage();
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef(null);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true,
     });
   }, []);
+
+  const handleVideoClick = () => {
+    setIsVideoPlaying(true);
+  };
 
   return (
     <section
@@ -132,17 +139,19 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right Image */}
+          {/* Right Video */}
           <div className="hidden px-4 xl:block xl:w-1/12"></div>
           <div className="w-full px-4 lg:w-6/12 mt-10 lg:mt-0" data-aos="fade-left">
             <div className="flex w-full lg:justify-end">
               <div className="relative z-10 aspect-[491/515] w-full max-w-[420px] sm:max-w-[491px] mx-auto lg:mx-0">
-                <Image
-                  src="/assets/img/Hero/hero-image-01.webp"
-                  alt="hero"
-                  fill
-                  priority
-                  className="object-contain"
+                {/* Always show the actual video */}
+                <video
+                  src="/assets/video/zuinder-hero-video.mp4"
+                  // autoPlay
+                  loop
+                  muted
+                  controls
+                  className="w-full h-full object-contain rounded-lg"
                 />
                 {/* Dotted Background */}
                 <span className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 z-[-1]">

@@ -24,7 +24,8 @@ export default function Services() {
         const activeServices = data.data
           .filter(service => service.isActive)
           .sort((a, b) => (a.order || 0) - (b.order || 0));
-        setServices(activeServices);
+        // Limit to 3 services for home page
+        setServices(activeServices.slice(0, 3));
       }
     } catch (error) {
       console.error('Failed to fetch services:', error);
@@ -101,7 +102,7 @@ export default function Services() {
                 <div className="p-6 sm:p-8 md:p-6 lg:p-8 xl:p-10 flex flex-col flex-1">
                   <h3>
                     <Link
-                      href={`/services`}
+                      href={`/services#${service._id}`}
                       className="text-dark hover:text-[#de5f04] mb-4 block text-lg sm:text-xl font-bold"
                     >
                       {getLocalizedText(service.title)}
@@ -133,7 +134,7 @@ export default function Services() {
                   )}
                   
                   <Link
-                    href={`/services`}
+                    href={`/services#${service._id}`}
                     className="text-gray-600 hover:text-[#de5f04] inline-flex items-center gap-2 sm:gap-3 text-base font-medium mt-auto"
                   >
                     <span>{t("servicesHome.viewDetails")}</span>
