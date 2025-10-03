@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { useState } from "react";
 
 const clients = [
   {
     name: "Lineicons",
     link: "https://lineicons.com",
     image: "/assets/img/clients/lineicons.svg",
+    fill: true,
     width: 246,
     height: 40,
   },
@@ -43,8 +45,10 @@ const clients = [
 
 export default function ClientsSection() {
   const { t } = useLanguage();
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
   return (
-    <section id="clients" className="relative bg-[#004A70] py-15 pt-10 pb-30 sm:py-30 ">
+    <section id="clients" className="relative bg-white py-15 pt-10 pb-30 sm:py-30 ">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="w-full px-4">
@@ -52,7 +56,7 @@ export default function ClientsSection() {
             <h2 className="mb-4 text-3xl font-bold text-[#F15A29] md:text-4xl">
               {t("clients.title")}
             </h2>
-            <p className="text-lg font-medium text-white">
+            <p className="text-lg font-medium text-[#004A70]">
               {t("clients.desc")}
             </p>
           </div>
@@ -67,15 +71,39 @@ export default function ClientsSection() {
                 href={client.link}
                 target="_blank"
                 rel="nofollow noreferrer"
-                className="relative mx-3 flex max-w-[120px] items-center justify-center py-4 opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0 sm:mx-4 lg:max-w-[130px] xl:mx-6 xl:max-w-[150px] 2xl:mx-8 2xl:max-w-[160px]"
+                className="relative mx-3 flex max-w-[120px] items-center justify-center py-4 opacity-60 transition-all hover:opacity-100 sm:mx-4 lg:max-w-[130px] xl:mx-6 xl:max-w-[150px] 2xl:mx-8 2xl:max-w-[160px]"
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
-                <Image
-                  src={client.image}
-                  alt={client.name}
-                  width={client.width}
-                  height={client.height}
-                  className="object-contain"
-                />
+                <div 
+                  className="w-full h-full flex items-center justify-center"
+                  style={{ 
+                    filter: hoveredIndex === index 
+                      ? 'brightness(0) saturate(100%) invert(54%) sepia(98%) saturate(1528%) hue-rotate(340deg) brightness(95%) contrast(92%)' 
+                      : 'brightness(0) saturate(100%) invert(29%) sepia(98%) saturate(1528%) hue-rotate(159deg) brightness(95%) contrast(92%)',
+                    transition: 'filter 0.3s ease'
+                  }}
+                >
+                  <Image
+                    src={client.image}
+                    alt={client.name}
+                    width={client.width}
+                    height={client.height}
+                    className="object-contain"
+                  />
+                </div>
+                {/* <div
+  className="w-full h-full flex items-center justify-center text-[#004A70] hover:text-[#F15A29] transition-colors duration-300"
+>
+  <Image
+    src={client.image}
+    alt={client.name}
+    width={client.width}
+    height={client.height}
+    className="object-contain"
+  />
+</div> */}
+
               </a>
             ))}
           </div>

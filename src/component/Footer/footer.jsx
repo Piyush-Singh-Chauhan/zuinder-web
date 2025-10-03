@@ -1,16 +1,49 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    // Fetch services from the backend
+    const fetchServices = async () => {
+      try {
+        const response = await fetch('/api/admin/services');
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && Array.isArray(result.data)) {
+            // Filter active services and sort by order
+            const activeServices = result.data
+              .filter(service => service.isActive)
+              .sort((a, b) => (a.order || 0) - (b.order || 0));
+            setServices(activeServices);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching services for footer:', error);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+  // Helper function to get localized text
+  const getLocalizedText = (textObj, fallback = '') => {
+    if (!textObj) return fallback;
+    if (typeof textObj === 'string') return textObj;
+    return textObj[language] || textObj.en || textObj.pt || fallback;
+  };
+
   return (
-    <footer className="relative z-10 bg-[#004A70] pb-12 pt-[100px] text-white">
-      <div className="container mx-auto px-4">
-        <div className="-mx-4 flex flex-wrap">
+    <footer className="relative z-10 bg-[#004A70] pb-8 pt-16 text-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-wrap -mx-4">
           {/* Contact Info */}
-          <div className="w-full px-4 md:w-1/2 lg:w-4/12">
-            <div className="mb-10">
+          <div className="w-full px-4 mb-10 md:w-1/2 lg:w-4/12">
+            <div className="">
               <h2 className="mb-5 text-4xl font-bold leading-tight text-white md:text-[44px]">
                 {t("footer.letsTalk")}
               </h2>
@@ -21,50 +54,85 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* What I Do */}
-          <div className="w-full px-4 md:w-1/2 lg:w-3/12">
-            <div className="mb-10">
+          {/* What I Do - Services */}
+          <div className="w-full px-4 mb-10 md:w-1/2 lg:w-3/12">
+            <div className="">
               <h3 className="mb-9 text-xl font-semibold text-white">{t("footer.whatIDo")}</h3>
               <ul className="space-y-3">
-                {(t("footer.whatIDoLinks") || []).map(
-                  (item, i) => (
-                    <li key={i}>
+                {services.length > 0 ? (
+                  services.map((service) => (
+                    <li key={service._id}>
                       <a
-                        href="#"
+                        href={`/services#${service._id}`}
                         className="inline-block text-base text-[#4A90A4] hover:text-[#F15A29] transition"
                       >
-                        {item}
+                        {getLocalizedText(service.title, 'Service')}
                       </a>
                     </li>
+                  ))
+                ) : (
+                  // Fallback to static links if services can't be loaded
+                  (t("footer.whatIDoLinks") || []).map(
+                    (item, i) => (
+                      <li key={i}>
+                        <a
+                          href="/services"
+                          className="inline-block text-base text-[#4A90A4] hover:text-[#F15A29] transition"
+                        >
+                          {item}
+                        </a>
+                      </li>
+                    )
                   )
                 )}
               </ul>
             </div>
           </div>
+          
           {/* News */}
-          <div className="w-full px-4 md:w-1/2 lg:w-2/12">
-            <div className="mb-10">
+          <div className="w-full px-4 mb-10 md:w-1/2 lg:w-2/12">
+            <div className="">
               <h3 className="mb-9 text-xl font-semibold text-white">{t("footer.news")}</h3>
               <ul className="space-y-3">
-                {(t("footer.newsLinks") || []).map(
-                  (item, i) => (
-                    <li key={i}>
-                      <a
-                        href="#"
-                        className="inline-block text-base text-[#4A90A4] hover:text-[#F15A29] transition"
-                      >
-                        {item}
-                      </a>
-                    </li>
-                  )
-                )}
+                <li>
+                  <a
+                    href="/resources/case-studies"
+                    className="inline-block text-base text-[#4A90A4] hover:text-[#F15A29] transition"
+                  >
+                    {language === 'pt' ? 'Estudos de Caso' : 'Case Studies'}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/blog"
+                    className="inline-block text-base text-[#4A90A4] hover:text-[#F15A29] transition"
+                  >
+                    {language === 'pt' ? 'Artigos do Blog' : 'Blog Articles'}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/resources/industry-reports"
+                    className="inline-block text-base text-[#4A90A4] hover:text-[#F15A29] transition"
+                  >
+                    {language === 'pt' ? 'Relatórios da Indústria' : 'Industry Reports'}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/resources/free-templates"
+                    className="inline-block text-base text-[#4A90A4] hover:text-[#F15A29] transition"
+                  >
+                    {language === 'pt' ? 'Templates Gratuitos' : 'Free Templates'}
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="w-full px-4 md:w-1/2 lg:w-3/12">
-            <div className="mb-10">
+          <div className="w-full px-4 mb-10 md:w-1/2 lg:w-3/12">
+            <div className="">
               <h3 className="mb-9 text-xl font-semibold text-white">{t("footer.quickLinks")}</h3>
               <ul className="space-y-3">
                 {(t("footer.quickLinksItems") || []).map(
@@ -85,13 +153,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-10 border-t border-white/10 pt-12">
-          <div className="mb-5 flex items-center justify-center space-x-4">
+        <div className=" border-t border-white/10 pt-12">
+          <div className="flex flex-wrap items-center justify-center mb-5 -mx-2">
             {["facebook", "twitter", "linkedin"].map((social, i) => (
               <a
                 key={i}
                 href="#"
-                className="mx-2 flex h-8 w-8 items-center justify-center rounded-full bg-[#4A90A4] text-dark duration-200 hover:bg-[#F15A29] hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#4A90A4] text-dark duration-200 hover:bg-[#F15A29] hover:text-white mx-2 my-1"
               >
                 {/* Placeholder Icon */}
                 <span className="text-sm font-bold">{social[0].toUpperCase()}</span>

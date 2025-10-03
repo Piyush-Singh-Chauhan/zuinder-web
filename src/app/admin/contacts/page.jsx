@@ -184,12 +184,80 @@ export default function ContactsPage() {
                       <div className="flex items-center space-x-4">
                         {/* Actions */}
                         <div className="flex items-center space-x-2">
-                          <a
-                            href={`mailto:${contact.email}`}
+                          {/* <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              const subject = encodeURIComponent('Re: Contact Form Submission');
+                              const mailtoLink = `mailto:${contact.email}?subject=${subject}`;
+                              
+                              // Log for debugging
+                              console.log('Attempting to open mailto link:', mailtoLink);
+                              
+                              // Try multiple approaches to ensure email client opens
+                              const openMailClient = () => {
+                                // Method 1: Direct assignment
+                                try {
+                                  window.location.href = mailtoLink;
+                                  return true;
+                                } catch (error) {
+                                  console.error('Method 1 failed:', error);
+                                }
+                                
+                                // Method 2: Window open
+                                try {
+                                  const newWindow = window.open(mailtoLink, '_self');
+                                  if (newWindow) {
+                                    return true;
+                                  }
+                                } catch (error) {
+                                  console.error('Method 2 failed:', error);
+                                }
+                                
+                                // Method 3: Create temporary link and click
+                                try {
+                                  const link = document.createElement('a');
+                                  link.href = mailtoLink;
+                                  link.style.display = 'none';
+                                  document.body.appendChild(link);
+                                  link.click();
+                                  document.body.removeChild(link);
+                                  return true;
+                                } catch (error) {
+                                  console.error('Method 3 failed:', error);
+                                }
+                                
+                                // Method 4: Fallback alert with instructions
+                                alert(`Please manually send an email to: ${contact.email}\nSubject: Re: Contact Form Submission`);
+                                return false;
+                              };
+                              
+                              const success = openMailClient();
+                              
+                              if (!success) {
+                                console.error('All methods failed to open email client');
+                              }
+                            }}
                             className="text-[#F15A29] hover:text-[#004A70] text-sm font-medium"
                           >
                             Reply
-                          </a>
+                          </button> */}
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              const subject = encodeURIComponent(
+                                "Re: Contact Form Submission"
+                              );
+                              const body = encodeURIComponent("Hello,\n\n"); // you can pre-fill message
+                              const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${contact.email}&su=${subject}&body=${body}`;
+
+                              // Open Gmail in new tab
+                              window.open(gmailLink, "_blank");
+                            }}
+                            className="text-[#F15A29] hover:text-[#004A70] text-sm font-medium"
+                          >
+                            Reply
+                          </button>
+
                           <button
                             onClick={() => handleDelete(contact._id)}
                             disabled={deleteLoading === contact._id}

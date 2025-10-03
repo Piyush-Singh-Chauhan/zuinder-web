@@ -92,7 +92,7 @@ export default function AdminDashboard() {
       subtitle: "Total members",
       icon: "👥",
       color: "bg-indigo-500",
-      link: "/admin/team"
+      link: "/admin/team-members"
     },
     {
       title: "Contact Messages",

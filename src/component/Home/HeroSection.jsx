@@ -27,27 +27,27 @@ export default function HeroSection() {
       id="home"
       className="relative bg-bg pt-24 md:pt-32 lg:pt-40 pb-12 md:pb-16 lg:pb-20"
     >
-      <div className="container mx-auto px-4">
-        <div className="flex flex-wrap items-center -mx-4">
-          {/* Left Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-wrap  items-center -mx-4">
+          {/* Top Content (Text) */}
           <div
-            className="w-full px-4 lg:w-6/12 xl:w-5/12"
+            className="w-full px-4"
             data-aos="fade-right"
           >
-            <div className="hero-content text-center lg:text-left">
-              <h1 className="text-text mb-4 text-3xl leading-snug font-bold sm:text-4xl lg:text-[40px] xl:text-[42px]">
+            <div className="hero-content text-center">
+              <h1 className="text-text mb-4 text-3xl text-[#004A70] leading-snug font-bold sm:text-4xl lg:text-[40px] xl:text-[42px]">
                 {t("hero.title").includes("<br>") ? (
                   <span dangerouslySetInnerHTML={{ __html: t("hero.title") }} />
                 ) : (
                   t("hero.title")
                 )}
               </h1>
-              <p className="text-text mb-8 max-w-xl mx-auto lg:mx-0 text-base opacity-80">
+              <p className="text-text mb-8 max-w-3xl mx-auto text-base opacity-80">
                 {t("hero.subtitle")}
               </p>
 
               {/* Buttons */}
-              <ul className="flex flex-wrap font-bold justify-center lg:justify-start items-center gap-6 sm:gap-8">
+              <ul className="flex flex-wrap font-bold justify-center items-center gap-10 sm:gap-8">
                 <li>
                   <a
                     href="/portfolio"
@@ -102,11 +102,11 @@ export default function HeroSection() {
 
               {/* Trusted Clients */}
               <div className="clients pt-12 sm:pt-16">
-                <p className="mb-4 flex items-center justify-center lg:justify-start text-xs font-normal text-text opacity-70">
+                <p className="mb-4 flex items-center justify-center text-xs font-normal text-text opacity-70">
                   {t("hero.trusted")}
                   <span className="ml-2 inline-block h-[1px] w-8 bg-text/50"></span>
                 </p>
-                <div className="flex flex-wrap justify-center lg:justify-start items-center gap-6">
+                <div className="flex flex-wrap justify-center items-center gap-10">
                   <div className="w-auto">
                     <Image
                       src="/assets/img/clients/lineicons.svg"
@@ -130,7 +130,7 @@ export default function HeroSection() {
                       src="/assets/img/clients/uideck.svg"
                       alt="Uideck"
                       width={150}
-                      height={40}
+                       height={40}
                       className="h-auto max-w-[150px] sm:max-w-[200px]"
                     />
                   </div>
@@ -139,43 +139,40 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right Video */}
-          <div className="hidden px-4 xl:block xl:w-1/12"></div>
-          <div className="w-full px-4 lg:w-6/12 mt-10 lg:mt-0" data-aos="fade-left">
-            <div className="flex w-full lg:justify-end">
-              <div className="relative z-10 aspect-[491/515] w-full max-w-[420px] sm:max-w-[491px] mx-auto lg:mx-0">
-                {/* Always show the actual video */}
-                <video
-                  src="/assets/video/zuinder-hero-video.mp4"
-                  // autoPlay
-                  loop
-                  muted
-                  controls
-                  className="w-full h-full object-contain rounded-lg"
-                />
-                {/* Dotted Background */}
-                <span className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 z-[-1]">
-                  <svg
-                    width="93"
-                    height="93"
-                    viewBox="0 0 93 93"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    {[...Array(5)].map((_, row) =>
-                      [...Array(5)].map((_, col) => (
-                        <circle
-                          key={`${row}-${col}`}
-                          cx={2.5 + col * 22}
-                          cy={2.5 + row * 22}
-                          r="2.5"
-                          fill="var(--color-secondary)"
-                        />
-                      ))
-                    )}
-                  </svg>
-                </span>
-              </div>
+          {/* Bottom Video */}
+          <div className="w-full px-4 mt-10 lg:mt-16" data-aos="fade-up">
+            <div className="relative z-10 aspect-[18/7] w-full max-w-full mx-auto">
+              {/* Always show the actual video */}
+              <video
+                src="/assets/video/zuinder-hero-video.mp4"
+                // autoPlay
+                loop
+                muted
+                controls
+                className="w-full h-full object-contain rounded-lg"
+              />
+              {/* Dotted Background */}
+              {/* <span className="absolute -bottom-6 -left-20 sm:-bottom-8 sm:-left-8 z-[-1]">
+                <svg
+                  width="93"
+                  height="93"
+                  viewBox="0 0 93 93"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {[...Array(5)].map((_, row) =>
+                    [...Array(5)].map((_, col) => (
+                      <circle
+                        key={`${row}-${col}`}
+                        cx={2.5 + col * 22}
+                        cy={2.5 + row * 22}
+                        r="2.5"
+                        fill="var(--color-secondary)"
+                      />
+                    ))
+                  )}
+                </svg>
+              </span> */}
             </div>
           </div>
         </div>

@@ -45,7 +45,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="bg-[#004A70] pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]"
+      className="bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]"
     >
       <div className="container mx-auto px-4">
         {/* Section Header */}
@@ -55,7 +55,7 @@ export default function Services() {
               <span className="mb-2 block text-lg font-semibold text-[#de5f04]">
                 {t("servicesHome.badge")}
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-[45px]/[55px] font-bold text-white">
+              <h2 className="text-3xl sm:text-4xl md:text-[45px]/[55px] font-bold text-[#004A70]">
                 {t("servicesHome.title")}
               </h2>
             </div>
@@ -103,7 +103,7 @@ export default function Services() {
                   <h3>
                     <Link
                       href={`/services#${service._id}`}
-                      className="text-dark hover:text-[#de5f04] mb-4 block text-lg sm:text-xl font-bold"
+                      className="text-[#004A70] hover:text-[#de5f04] mb-4 block text-lg sm:text-xl font-bold"
                     >
                       {getLocalizedText(service.title)}
                     </Link>
@@ -135,7 +135,7 @@ export default function Services() {
                   
                   <Link
                     href={`/services#${service._id}`}
-                    className="text-gray-600 hover:text-[#de5f04] inline-flex items-center gap-2 sm:gap-3 text-base font-medium mt-auto"
+                    className="text-[#004A70]  hover:text-[#de5f04] inline-flex items-center gap-2 sm:gap-3 text-base font-medium mt-auto"
                   >
                     <span>{t("servicesHome.viewDetails")}</span>
                     <svg

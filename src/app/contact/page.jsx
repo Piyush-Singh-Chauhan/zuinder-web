@@ -11,7 +11,7 @@ export default function ContactPage() {
         <>
       <div className="min-h-screen bg-white pt-30"> {/* header ke neeche jagah chhodne ke liye */}
         {/* Breadcrumb + Title */}
-        <section className="relative z-10 overflow-hidden bg-white pb-[10px] pt-[55px]">
+        <section className="relative z-10 overflow-hidden bg-white pb-[10px] pt-10 ">
   <div className="container mx-auto px-4">
     <div className="-mx-4 flex flex-wrap items-center">
       {/* Left Side */}

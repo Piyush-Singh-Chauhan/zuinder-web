@@ -75,7 +75,7 @@ export default function TeamSection() {
             <span className="mb-2 block text-lg font-semibold text-[#F15A29]">
               {t("team.badge")}
             </span>
-            <h2 className="mb-4 text-2xl font-bold text-dark sm:text-3xl md:text-[40px]">
+            <h2 className="mb-4 text-2xl font-bold text-[#004A70] sm:text-3xl md:text-[40px]">
               {t("team.title")}
             </h2>
             <p className="text-base text-body-color">
@@ -98,7 +98,7 @@ export default function TeamSection() {
             <span className="mb-2 block text-lg font-semibold text-[#F15A29]">
               {t("team.badge")}
             </span>
-            <h2 className="mb-4 text-2xl font-bold text-dark sm:text-3xl md:text-[40px]">
+            <h2 className="mb-4 text-2xl font-bold text-[#004A70] sm:text-3xl md:text-[40px]">
               {t("team.title")}
             </h2>
             <p className="text-base text-body-color">
@@ -190,7 +190,7 @@ export default function TeamSection() {
           <span className="mb-2 block text-lg font-semibold text-[#F15A29]">
             {t("team.badge")}
           </span>
-          <h2 className="mb-4 text-2xl font-bold text-dark sm:text-3xl md:text-[40px]">
+          <h2 className="mb-4 text-2xl font-bold text-[#004A70] sm:text-3xl md:text-[40px]">
             {t("team.title")}
           </h2>
           <p className="text-base text-body-color">

@@ -31,25 +31,23 @@ export default function Header() {
     <header
       className={`top-0 left-0 z-40 w-full transition-all duration-500 ease-in-out ${
         scrolled
-          ? "fixed bg-[#004A70]/90 backdrop-blur-md shadow-lg"
-          : "absolute bg-[#004A70]"
+          ? "fixed bg-black/90 backdrop-blur-md shadow-lg"
+          : "absolute bg-black"
       }`}
     >
       <div className="mx-auto w-full px-4 xl:container">
-        <div className="relative -mx-4 flex items-center justify-between">
+        <div className="relative -mx-4 flex items-center justify-between py-2">
           {/* Logo */}
-          <div className="w-52 max-w-full px-4 xl:w-60 transition-all duration-500 ease-in-out">
+          <div className="w-52 max-w-full px-4 xl:w-60">
             <a
-              className={`block w-full ${
-                scrolled ? "py-4" : "py-6 lg:py-8"
-              } transition-all duration-500`}
+              className="block w-full py-2"
               href="/"
             >
               <Image
-                src="/assets/img/logo/logo.jpeg"
+                src="/assets/img/logo/logo-removebg.png"
                 alt="logo"
-                width={175}
-                height={40}
+                width={140}
+                height={32}
                 className="object-contain"
               />
             </a>
@@ -61,15 +59,15 @@ export default function Header() {
               {/* Hamburger button */}
               <button
                 aria-label="navbarToggler"
-                className="absolute top-1/2 right-4 block -translate-y-1/2 rounded-lg px-3 py-1.5 lg:hidden focus:ring-2"
+                className="absolute top-1/2 right-4 block -translate-y-1/2 lg:hidden focus:outline-none"
                 onClick={() => {
                   setNavbarOpen(!navbarOpen);
                   setPagesDropdownOpen(false);
                 }}
               >
-                <span className="block h-[2px] w-[30px] my-1 bg-white"></span>
-                <span className="block h-[2px] w-[30px] my-1 bg-white"></span>
-                <span className="block h-[2px] w-[30px] my-1 bg-white"></span>
+                <span className={`block h-[2px] w-[30px] my-1 bg-white transition-all duration-300 ease-in-out ${navbarOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+                <span className={`block h-[2px] w-[30px] my-1 bg-white transition-all duration-300 ease-in-out ${navbarOpen ? 'opacity-0' : ''}`}></span>
+                <span className={`block h-[2px] w-[30px] my-1 bg-white transition-all duration-300 ease-in-out ${navbarOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
               </button>
 
               {/* Navbar */}
@@ -78,7 +76,7 @@ export default function Header() {
                   navbarOpen ? "block" : "hidden"
                 } lg:block absolute top-full right-4 w-full max-w-[250px] rounded-lg bg-[#004A70] p-5 py-5 shadow-lg max-lg:max-h-[350px] max-lg:overflow-y-auto lg:static lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none xl:px-6`}
               >
-                <ul className="block font-bold lg:flex">
+                <ul className="block font-bold lg:flex" >
                   {[
                   { name: t("nav.home"), href: "/" },
                         { name: t("nav.servicesPage"), href: "/services" },
@@ -89,7 +87,7 @@ export default function Header() {
                     <li key={item.name} className="group relative lg:px-5">
                       <a
                         href={item.href}
-                        className="flex py-2 text-base text-darkBlue lg:py-6 hover:text-orangeBrand transition-colors"
+                        className="flex py-3 text-base text-darkBlue lg:py-3 hover:text-[#F15A29] transition-colors duration-300"
                       >
                         {item.name}
                       </a>
@@ -213,7 +211,7 @@ export default function Header() {
               {/* CTA */}
               <a
                 href="/contact"
-                className="px-8 py-3 rounded-full font-medium text-white
+                className="px-6 py-2 rounded-full font-medium text-white text-sm
                              [background:linear-gradient(98deg,#e46703_-1.68%,#c7340d_103.45%)]
                              hover:[background:linear-gradient(98deg,#c7340d_-1.68%,#e46703_103.45%)]
                              transition duration-500 ease-in-out"

@@ -344,7 +344,7 @@ export default function Portfolio() {
                     <h3 className="mt-3">
                       <a
                         href={itemLink}
-                        className="inline-block text-xl font-semibold text-black hover:text-primary mb-2"
+                        className="inline-block text-xl font-semibold text-[#004A70] hover:text-[#df5f04] mb-2"
                       >
                         {itemTitle}
                       </a>

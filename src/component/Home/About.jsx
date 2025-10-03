@@ -6,7 +6,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative z-10 bg-white py-16 sm:py-20 lg:py-24"
+      className="relative z-10 bg-white py-8 sm:py-15 lg:py-16"
     >
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap items-center -mx-4">
@@ -15,7 +15,7 @@ export default function AboutSection() {
             <span className="mb-3 block text-lg font-bold text-[#F15A29] md:text-xl">
               {tt("about.badge")}
             </span>
-            <h2 className="mb-5 text-2xl sm:text-3xl md:text-4xl lg:text-[45px] font-bold leading-snug text-black">
+            <h2 className="mb-5 text-2xl  sm:text-3xl md:text-4xl lg:text-[45px] font-bold leading-snug text-[#004A70] ">
               {tt("about.title")}
             </h2>
             <p className="mx-auto lg:mx-0 max-w-2xl text-base font-medium text-body-color">
@@ -25,7 +25,7 @@ export default function AboutSection() {
 
           {/* Right Content */}
           <div className="w-full px-4 lg:w-1/2 xl:w-5/12 text-center lg:text-left">
-            <h3 className="mb-6 text-xl sm:text-2xl md:text-3xl font-semibold text-black">
+            <h3 className="mb-6 text-xl sm:text-2xl md:text-3xl font-semibold text-[#004A70] ">
               {tt("about.connect")}
             </h3>
             <p className="mb-10 mx-auto lg:mx-0 max-w-2xl text-base font-medium text-body-color">

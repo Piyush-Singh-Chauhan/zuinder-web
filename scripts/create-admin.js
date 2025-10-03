@@ -60,10 +60,10 @@ async function createAdmin() {
 
     // Admin details
     const adminData = {
-      email: "admin@zuinder.com",
-      password: "admin123", // Change this to a secure password
-      name: "Zuinder Admin",
-      role: "super_admin"
+      email: process.env.ADMIN_EMAIL || "admin@zuinder.com",
+      password: process.env.ADMIN_PASSWORD || "admin123", // Change this to a secure password
+      name: process.env.ADMIN_NAME || "Zuinder Admin",
+      role: process.env.ADMIN_ROLE || "super_admin"
     };
 
     // Check if admin already exists

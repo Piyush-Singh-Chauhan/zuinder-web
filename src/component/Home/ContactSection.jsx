@@ -144,13 +144,13 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="py-8  px-4 sm:px-6 lg:px-8">
+    <section className="py-4  px-4 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="max-w-4xl mx-auto text-center">
         <p className="text-sm sm:text-base md:text-lg uppercase font-semibold text-[#d0440a] tracking-wider">
           {t("contactSection.badge")}
         </p>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mt-2 leading-tight">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#004A70] mt-2 leading-tight">
           {t("contactSection.title")}
         </h2>
         <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-sm sm:text-base md:text-lg">

@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Header from "@/component/Header/header";
 import Footer from "@/component/Footer/footer";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 export default function ConditionalLayout({ children }) {
   const pathname = usePathname();
@@ -37,6 +38,8 @@ export default function ConditionalLayout({ children }) {
       {children}
       {/* Only show Footer if conditions are met */}
       {showHeaderFooter && <Footer />}
+      {/* Show WhatsApp button on all non-admin routes */}
+      {showHeaderFooter && <WhatsAppFloat />}
     </>
   );
 }

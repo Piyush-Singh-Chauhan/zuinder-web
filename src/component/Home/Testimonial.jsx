@@ -15,7 +15,7 @@ export default function TestimonialSection() {
               <span className="mb-2 block text-lg font-semibold text-[#F15A29]">
                 {t("testimonial.badge")}
               </span>
-              <h2 className="mb-4 text-2xl font-bold text-black sm:text-3xl md:text-4xl lg:text-[45px]">
+              <h2 className="mb-4 text-2xl font-bold text-[#004A70] sm:text-3xl md:text-4xl lg:text-[45px]">
                 {t("testimonial.title")}
               </h2>
               <p className="text-base sm:text-lg font-medium text-body-color">

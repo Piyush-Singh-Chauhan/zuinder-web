@@ -117,7 +117,7 @@ export default function PortfolioSection() {
             <span className="mb-2 block text-lg font-semibold text-[#F15A29]">
               {t("portfolioHome.badge")}
             </span>
-            <h2 className="mb-5 text-3xl font-bold sm:text-4xl md:text-[45px] leading-[55px] text-black">
+            <h2 className="mb-5 text-3xl font-bold sm:text-4xl md:text-[45px] leading-[55px] text-[#004A70] ">
               {t("portfolioHome.title")}
             </h2>
             <p className="text-lg font-medium text-body-color">
@@ -192,7 +192,7 @@ export default function PortfolioSection() {
                   <h3 className="mt-3">
                     <a
                       href={itemLink}
-                      className="inline-block text-xl font-semibold text-black hover:text-primary mb-2"
+                      className="inline-block text-xl font-semibold text-[#004A70] hover:text-primary mb-2"
                     >
                       {itemTitle}
                     </a>

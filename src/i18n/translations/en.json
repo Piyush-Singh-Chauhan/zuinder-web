@@ -298,7 +298,7 @@
     "address": "123 Digital Avenue, Tech City TC 10101",
     "phone": "+1 (555) 123-4567",
     "whatIDo": "Our Services",
-    "whatIDoLinks": ["Web Development", "App Development", "UI/UX Design", "Brand Strategy"],
+    "whatIDoLinks": ["Web Development", "App Development", "UI/UX Design"],
     "news": "Resources",
     "newsLinks": ["Case Studies", "Blog Articles", "Industry Reports", "Free Templates"],
     "quickLinks": "Quick Links",

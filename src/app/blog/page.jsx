@@ -290,7 +290,7 @@ export default function BlogHeader() {
                           <h3 className="mb-3 text-lg sm:text-xl font-semibold text-black line-clamp-2">
                             <Link
                               href={blogLink}
-                              className="hover:text-primary duration-200"
+                              className="text-[#004A70] hover:text-primary duration-200"
                             >
                               <span className="absolute inset-0" aria-hidden="true"></span>
                               {blogTitle}

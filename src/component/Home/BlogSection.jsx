@@ -97,7 +97,7 @@ export default function BlogSection() {
               <span className="text-[#F15A29] mb-2 block text-sm sm:text-base font-semibold">
                 {t("blog.badge")}
               </span>
-              <h2 className="mb-4 text-2xl font-bold text-black sm:text-3xl md:text-4xl lg:text-[45px]">
+              <h2 className="mb-4 text-2xl font-bold text-[#004A70] sm:text-3xl md:text-4xl lg:text-[45px]">
                 {t("blog.title")}
               </h2>
               <p className="text-body-color text-base sm:text-lg font-medium">
@@ -133,7 +133,7 @@ export default function BlogSection() {
                     <h3 className="mb-3 line-clamp-2">
                       <Link
                         href={blog.slug ? `/blog/${blog.slug}` : `#`}
-                        className="hover:text-primary text-lg sm:text-xl font-semibold text-black duration-200"
+                        className="hover:text-primary text-lg sm:text-xl font-semibold text-[#004A70] duration-200"
                       >
                         <span className="absolute inset-0" aria-hidden="true"></span>
                         {getLocalizedText(blog.title)}
@@ -145,7 +145,7 @@ export default function BlogSection() {
                   </div>
                   <Link
                     href={blog.slug ? `/blog/${blog.slug}` : `#`}
-                    className="hover:text-primary text-xs sm:text-sm font-medium text-black underline duration-200 hover:no-underline"
+                    className=" text-xs sm:text-sm font-medium text-[#004A70] underline duration-200 hover:no-underline hover:text-[#F15A29]"
                   >
                     {t("blog.readMore")}
                   </Link>
